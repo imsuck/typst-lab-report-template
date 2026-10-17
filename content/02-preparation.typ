@@ -1,8 +1,8 @@
 #import "../metadata.typ": *
 
-= Phần chuẩn bị trước thí nghiệm (Preparation)
+= Phần chuẩn bị trước thí nghiệm (Preparation) <sec:prep>
 
-== Khảo sát cấu trúc thanh ghi GPIO vi điều khiển STM32F4 <sec:prep>
+== Khảo sát cấu trúc thanh ghi GPIO vi điều khiển STM32F4
 Theo tài liệu @stm32ref, mỗi cổng GPIO gồm có các thanh ghi chính:
 - `MODER`: Thanh ghi cấu hình chế độ (Input, Output, Alternate Function, Analog).
 - `OTYPER`: Thanh ghi xác định kiểu ngõ ra (Push-Pull hoặc Open-Drain).

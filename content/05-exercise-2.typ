@@ -1,6 +1,6 @@
 #import "../metadata.typ": *
 
-= Bài tập 2: Đọc trạng thái nút nhấn (GPIO Input & Debounce)
+= Bài tập 2: Đọc trạng thái nút nhấn (GPIO Input & Debounce) <sec:exercise2>
 
 == Mục tiêu thí nghiệm
 - Cấu hình GPIO ở chế độ ngõ vào số (Digital Input).

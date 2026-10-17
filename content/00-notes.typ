@@ -1,6 +1,6 @@
 #import "../metadata.typ": *
 
-= Lưu ý thực hành & Quy định an toàn phòng thí nghiệm
+= Lưu ý thực hành & Quy định an toàn phòng thí nghiệm <sec:notes>
 
 #alert-box(kind: "warning", title: "Cảnh báo an toàn điện & bảo vệ thiết bị")[
   1. Luôn ngắt nguồn điện trước khi cắm hoặc rút dây nối trên kit thí nghiệm.

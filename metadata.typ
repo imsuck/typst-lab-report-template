@@ -6,11 +6,11 @@
 #import "template/i18n.typ": create-i18n
 
 #let metadata = (
-  title: "Báo Cáo Thí Nghiệm Vi Xử Lý",
-  subtitle: "Bài 1: Khảo sát tập lệnh và lập trình GPIO trên vi điều khiển STM32",
-  school-name: "Đại học Quốc gia TP. Hồ Chí Minh\nTrường Đại học Bách Khoa",
+  title: [Báo Cáo Thí Nghiệm Vi Xử Lý],
+  subtitle: [Bài 1: Khảo sát tập lệnh và lập trình GPIO trên vi điều khiển STM32],
+  school-name: [Đại học Quốc gia TP. Hồ Chí Minh \ Trường Đại học Bách Khoa],
   faculty-name: [Khoa Điện -- Điện Tử \ Bộ môn Kỹ thuật Máy tính -- Viễn thông],
-  course-name: "Thí nghiệm Vi Xử Lý",
+  course-name: [Thí nghiệm Vi Xử Lý],
   course-code: "EE3051",
   class: "L01",
   group: "04",

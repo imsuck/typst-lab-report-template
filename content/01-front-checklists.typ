@@ -1,6 +1,6 @@
 #import "../metadata.typ": *
 
-= Danh sách kiểm tra đầu buổi & cuối buổi
+= Danh sách kiểm tra đầu buổi & cuối buổi <sec:start-checklist>
 
 #checklist-table(
   title: [1. Kiểm tra chuẩn bị đầu buổi (Pre-lab)],
@@ -26,7 +26,7 @@
       note: [Sẵn sàng],
     ),
   ),
-)
+) <checklist-1>
 
 #v(1em)
 
