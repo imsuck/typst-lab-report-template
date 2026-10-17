@@ -1,4 +1,4 @@
-#import "../metadata.typ": *
+#import "/metadata.typ": *
 
 = Phần chuẩn bị trước thí nghiệm (Preparation) <sec:prep>
 

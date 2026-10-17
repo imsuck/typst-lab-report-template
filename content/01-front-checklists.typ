@@ -1,4 +1,4 @@
-#import "../metadata.typ": *
+#import "/metadata.typ": *
 
 = Danh sách kiểm tra đầu buổi & cuối buổi <sec:start-checklist>
 

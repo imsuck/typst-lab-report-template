@@ -1,4 +1,4 @@
-#import "../metadata.typ": *
+#import "/metadata.typ": *
 
 = Danh sách kiểm tra đánh giá tại lớp (In-Class Checklist) <sec:end-checklist>
 

@@ -1,4 +1,4 @@
-#import "../metadata.typ": *
+#import "/metadata.typ": *
 
 = Bài tập 2: Đọc trạng thái nút nhấn (GPIO Input & Debounce) <sec:exercise2>
 

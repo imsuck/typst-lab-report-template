@@ -1,4 +1,4 @@
-#import "../metadata.typ": *
+#import "/metadata.typ": *
 
 #grading-sheet(
   metadata: metadata,

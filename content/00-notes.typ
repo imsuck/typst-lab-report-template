@@ -1,4 +1,4 @@
-#import "../metadata.typ": *
+#import "/metadata.typ": *
 
 = Lưu ý thực hành & Quy định an toàn phòng thí nghiệm <sec:notes>
 

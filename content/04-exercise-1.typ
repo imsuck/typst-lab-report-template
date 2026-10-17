@@ -1,4 +1,4 @@
-#import "../metadata.typ": *
+#import "/metadata.typ": *
 
 = Bài tập 1: Cấu hình GPIO Output điều khiển LED <sec:exercise1>
 

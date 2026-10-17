@@ -40,7 +40,7 @@
         #v(1.2cm)
         #let logo-path = metadata.at(
           "logo",
-          default: "../assets/logos/hcmut-logo.png",
+          default: "/template/assets/logos/hcmut-logo.png",
         )
         #image(logo-path, width: 3.5cm)
 
