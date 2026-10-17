@@ -20,12 +20,14 @@
   counter(page).update(1)
 
   // Table of Contents
-  outline(
-    title: i18n("toc-title"),
-    indent: auto,
-    depth: 3,
-  )
-  v(1.5em)
+  if metadata.at("show-toc", default: false) {
+    outline(
+      title: i18n("toc-title"),
+      indent: auto,
+      depth: 3,
+    )
+    v(1.5em)
+  }
 
   // List of Figures if requested
   if metadata.at("show-lof", default: false) {

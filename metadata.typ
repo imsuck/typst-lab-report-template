@@ -19,9 +19,10 @@
   location: "Phòng 304 B1, Cơ sở Lý Thường Kiệt",
   date: "17 Tháng 10, 2026",
   instructor: "TS. Nguyễn Văn Hướng",
-  lang: "vi",
+  lang: "vi", // "en|vi"
   draft: true,
   show-grading-sheet: true,
+  show-toc: true,
   show-lof: true,
   show-lot: true,
   // Font configurations
