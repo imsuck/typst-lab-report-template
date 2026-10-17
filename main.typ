@@ -13,3 +13,10 @@
 // Bibliography
 #v(1.5em)
 #bibliography("refs.bib", title: i18n("references-title"), style: "ieee")
+
+#if metadata.at("show-grading-sheet", default: true) [
+  #pagebreak()
+  #set page(numbering: (..) => "")
+  #include "content/06-grading-sheet.typ"
+]
+

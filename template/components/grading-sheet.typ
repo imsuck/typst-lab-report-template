@@ -27,7 +27,7 @@
   i18n: default-i18n,
 ) = {
   v(0.5em)
-  heading(level: 2, numbering: none)[#i18n("grading-sheet")]
+  heading(level: 2, numbering: none, outlined: false)[#i18n("grading-sheet")]
 
   table(
     columns: (auto, 1fr, 70pt, 70pt),

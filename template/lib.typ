@@ -19,11 +19,6 @@
   set page(numbering: "I")
   counter(page).update(1)
 
-  // Grading sheet if requested
-  if metadata.at("show-grading-sheet", default: true) {
-    grading-sheet(metadata: metadata, i18n: i18n)
-    pagebreak()
-  }
 
   // Table of Contents
   outline(
