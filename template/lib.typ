@@ -19,7 +19,6 @@
   set page(numbering: "I")
   counter(page).update(1)
 
-
   // Table of Contents
   outline(
     title: i18n("toc-title"),
