@@ -20,7 +20,7 @@
   date: "17 Tháng 10, 2026",
   instructor: "TS. Nguyễn Văn Hướng",
   lang: "vi",
-  draft: false,
+  draft: true,
   show-grading-sheet: true,
   show-lof: true,
   show-lot: true,

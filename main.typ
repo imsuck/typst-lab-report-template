@@ -12,4 +12,4 @@
 
 // Bibliography
 #v(1.5em)
-#bibliography("refs.bib", title: "Tài liệu tham khảo", style: "ieee")
+#bibliography("refs.bib", title: i18n("references-title"), style: "ieee")

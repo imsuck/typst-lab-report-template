@@ -1,4 +1,5 @@
 #import "../i18n.typ": i18n as default-i18n
+#import "../styles.typ": draft-watermark
 
 #let cover-page(
   metadata: (:),
@@ -10,12 +11,18 @@
     "Times New Roman",
     "DejaVu Serif",
   ))
+  let heading-font = font-cfg.at("heading", default: body-font)
 
   set text(font: body-font)
   page(
     header: none,
     footer: none,
     margin: (x: 2.5cm, top: 2cm, bottom: 2cm),
+    background: if metadata.at("draft", default: false) {
+      draft-watermark(i18n("draft"), font: heading-font)
+    } else {
+      none
+    },
     [
       #align(center)[
         #text(size: 13pt, weight: "bold", fill: rgb("#002855"))[

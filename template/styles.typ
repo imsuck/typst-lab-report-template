@@ -5,7 +5,7 @@
 #let bg-soft = rgb("#f8f9fa")
 #let border-color = rgb("#dee2e6")
 
-#let draft-watermark(text, font: auto) = {
+#let draft-watermark(watermark-text, font: auto) = {
   place(
     center + horizon,
     rotate(
@@ -15,7 +15,7 @@
         size: 50pt,
         weight: "bold",
         font: font,
-        text,
+        watermark-text,
       ),
     ),
   )
