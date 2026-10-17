@@ -1,5 +1,5 @@
 #import "styles.typ": apply-styles, primary-color, secondary-color
-#import "i18n.typ": i18n, create-i18n
+#import "i18n.typ": create-i18n, i18n
 #import "components/cover.typ": cover-page
 #import "components/checklist.typ": checklist-table
 #import "components/grading-sheet.typ": grading-sheet
@@ -81,21 +81,19 @@
     line(length: length, stroke: stroke)
   }
   let h = selector(heading.where(level: 2))
-      .or(heading.where(level: 3))
-      .or(heading.where(level: 4))
-      .or(heading.where(level: 5))
-      .or(heading.where(level: 6))
-      .or(heading.where(level: 7))
-      .or(heading.where(level: 8))
-      .or(heading.where(level: 9))
-      .or(heading.where(level: 10))
+    .or(heading.where(level: 3))
+    .or(heading.where(level: 4))
+    .or(heading.where(level: 5))
+    .or(heading.where(level: 6))
+    .or(heading.where(level: 7))
+    .or(heading.where(level: 8))
+    .or(heading.where(level: 9))
+    .or(heading.where(level: 10))
   outline(
     title: none,
-    target: selector(h)
-      .after(after)
-      .before(before, inclusive: false),
-      depth: depth,
-      indent: indent,
+    target: selector(h).after(after).before(before, inclusive: false),
+    depth: depth,
+    indent: indent,
   )
   if addline == true {
     line(length: length, stroke: stroke)

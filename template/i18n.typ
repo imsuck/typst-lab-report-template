@@ -12,7 +12,10 @@
   let dict = _langs.at(lang, default: vi)
   assert(
     locale-id in dict,
-    message: "I18n key " + str(locale-id) + " doesn't exist for language " + str(lang)
+    message: "I18n key "
+      + str(locale-id)
+      + " doesn't exist for language "
+      + str(lang),
   )
   dict.at(locale-id)
 }

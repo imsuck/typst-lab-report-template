@@ -25,7 +25,7 @@
         #v(4pt)
       ]
       #body
-    ]
+    ],
   )
 }
 
@@ -44,6 +44,6 @@
         #v(4pt)
         #text(weight: "bold", fill: rgb("#2b8a3e"))[Trả lời:] #solution
       ]
-    ]
+    ],
   )
 }

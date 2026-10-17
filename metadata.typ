@@ -1,15 +1,7 @@
 #import "template/lib.typ": (
-  lab-report,
-  checklist-table,
-  grading-sheet,
-  cover-page,
-  alert-box,
-  question-box,
-  minitoc,
-  add-chapter,
-  primary-color,
+  add-chapter, alert-box, apply-styles, checklist-table, cover-page,
+  grading-sheet, lab-report, minitoc, primary-color, question-box,
   secondary-color,
-  apply-styles,
 )
 #import "template/i18n.typ": create-i18n
 
@@ -34,13 +26,17 @@
   show-lot: true,
   // Font configurations
   fonts: (
-    body: ("Times New Roman"),
-    code: ("Fira Code"),
-    heading: ("Times New Roman"),
+    body: "Times New Roman",
+    code: "Fira Code",
+    heading: "Times New Roman",
   ),
   members: (
     (name: "Nguyễn Văn An", id: "2110001", role: "Trưởng nhóm / Phần cứng"),
-    (name: "Trần Thị Bình", id: "2110002", role: "Lập trình / Thu thập dữ liệu"),
+    (
+      name: "Trần Thị Bình",
+      id: "2110002",
+      role: "Lập trình / Thu thập dữ liệu",
+    ),
     (name: "Lê Hoàng Cường", id: "2110003", role: "Báo cáo / Xử lý kết quả"),
   ),
 )

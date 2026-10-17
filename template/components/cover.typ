@@ -5,7 +5,11 @@
   i18n: default-i18n,
 ) = {
   let font-cfg = metadata.at("fonts", default: (:))
-  let body-font = font-cfg.at("body", default: ("Libertinus Serif", "Times New Roman", "DejaVu Serif"))
+  let body-font = font-cfg.at("body", default: (
+    "Libertinus Serif",
+    "Times New Roman",
+    "DejaVu Serif",
+  ))
 
   set text(font: body-font)
   page(
@@ -15,7 +19,10 @@
     [
       #align(center)[
         #text(size: 13pt, weight: "bold", fill: rgb("#002855"))[
-          #upper(metadata.at("school-name", default: "TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TP.HCM"))
+          #upper(metadata.at(
+            "school-name",
+            default: "TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TP.HCM",
+          ))
         ]
 
         #v(2pt)
@@ -24,7 +31,10 @@
         ]
 
         #v(1.2cm)
-        #let logo-path = metadata.at("logo", default: "../assets/logos/hcmut-logo.png")
+        #let logo-path = metadata.at(
+          "logo",
+          default: "../assets/logos/hcmut-logo.png",
+        )
         #image(logo-path, width: 3.5cm)
 
         #v(1.2cm)
@@ -68,7 +78,7 @@
             column-gutter: 12pt,
             [*#i18n("instructor"):*],
             [#metadata.at("instructor", default: "ThS. Nguyễn Văn A")],
-            
+
             [*#i18n("class-group") / #i18n("group"):*],
             [#metadata.at("class", default: "L01") - #i18n("group") #metadata.at("group", default: "01")],
 
@@ -79,7 +89,12 @@
           #v(0.6em)
           #table(
             columns: (auto, 1fr, 80pt, 90pt),
-            align: (center + horizon, left + horizon, center + horizon, center + horizon),
+            align: (
+              center + horizon,
+              left + horizon,
+              center + horizon,
+              center + horizon,
+            ),
             stroke: 0.5pt + rgb("#dee2e6"),
             table.header(
               [\#],
@@ -87,12 +102,16 @@
               [#i18n("student-id")],
               [#i18n("role")],
             ),
-            ..metadata.at("members", default: ()).enumerate().map(((idx, member)) => (
-              str(idx + 1),
-              member.name,
-              member.id,
-              member.at("role", default: "Thành viên"),
-            )).flatten()
+            ..metadata
+              .at("members", default: ())
+              .enumerate()
+              .map(((idx, member)) => (
+                str(idx + 1),
+                member.name,
+                member.id,
+                member.at("role", default: "Thành viên"),
+              ))
+              .flatten(),
           )
         ]
       ]
@@ -103,7 +122,7 @@
           #metadata.at("location", default: "TP. Hồ Chí Minh"), #metadata.at("date", default: datetime.today().display("[month repr:long] [year]"))
         ]
       ]
-    ]
+    ],
   )
 }
 

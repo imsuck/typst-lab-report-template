@@ -3,10 +3,26 @@
 #let grading-sheet(
   metadata: (:),
   criteria-list: (
-    (criteria: "Chuẩn bị bài trước thí nghiệm (Pre-lab questions & design)", max: "2.0", score: ""),
-    (criteria: "Kỹ năng thực hành, thao tác thiết bị và an toàn phòng lab", max: "3.0", score: ""),
-    (criteria: "Thu thập số liệu, kết quả đo và phân tích sóng/dữ liệu", max: "3.0", score: ""),
-    (criteria: "Báo cáo thí nghiệm, thảo luận kết quả & trả lời câu hỏi phụ", max: "2.0", score: ""),
+    (
+      criteria: "Chuẩn bị bài trước thí nghiệm (Pre-lab questions & design)",
+      max: "2.0",
+      score: "",
+    ),
+    (
+      criteria: "Kỹ năng thực hành, thao tác thiết bị và an toàn phòng lab",
+      max: "3.0",
+      score: "",
+    ),
+    (
+      criteria: "Thu thập số liệu, kết quả đo và phân tích sóng/dữ liệu",
+      max: "3.0",
+      score: "",
+    ),
+    (
+      criteria: "Báo cáo thí nghiệm, thảo luận kết quả & trả lời câu hỏi phụ",
+      max: "2.0",
+      score: "",
+    ),
   ),
   i18n: default-i18n,
 ) = {
@@ -15,20 +31,25 @@
 
   table(
     columns: (auto, 1fr, 70pt, 70pt),
-    align: (center + horizon, left + horizon, center + horizon, center + horizon),
+    align: (
+      center + horizon,
+      left + horizon,
+      center + horizon,
+      center + horizon,
+    ),
     stroke: 0.5pt + rgb("#dee2e6"),
     table.header(
-      [\#],
-      [#i18n("criteria")],
-      [#i18n("max-score")],
-      [#i18n("awarded-score")],
+      [\#], [#i18n("criteria")], [#i18n("max-score")], [#i18n("awarded-score")]
     ),
-    ..criteria-list.enumerate().map(((idx, row)) => (
-      str(idx + 1),
-      row.criteria,
-      row.max,
-      row.score,
-    )).flatten(),
+    ..criteria-list
+      .enumerate()
+      .map(((idx, row)) => (
+        str(idx + 1),
+        row.criteria,
+        row.max,
+        row.score,
+      ))
+      .flatten(),
     table.cell(colspan: 2, align: right + horizon)[*Tổng điểm:*],
     [*10.0*],
     [],
@@ -47,7 +68,7 @@
         *#i18n("instructor-signature")*
         #v(2.5cm)
       ]
-    ]
+    ],
   )
 }
 

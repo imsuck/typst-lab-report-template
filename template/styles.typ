@@ -26,8 +26,16 @@
 #let apply-styles(metadata: (:), i18n: default-i18n, body) = {
   // Font settings from metadata with fallbacks
   let font-cfg = metadata.at("fonts", default: (:))
-  let body-font = font-cfg.at("body", default: ("Libertinus Serif", "Times New Roman", "DejaVu Serif"))
-  let code-font = font-cfg.at("code", default: ("DejaVu Sans Mono", "Consolas", "Courier New"))
+  let body-font = font-cfg.at("body", default: (
+    "Libertinus Serif",
+    "Times New Roman",
+    "DejaVu Serif",
+  ))
+  let code-font = font-cfg.at("code", default: (
+    "DejaVu Sans Mono",
+    "Consolas",
+    "Courier New",
+  ))
   let heading-font = font-cfg.at("heading", default: body-font)
 
   set document(
@@ -49,8 +57,10 @@
             #metadata.at("course-name", default: "Lab Report") - #metadata.at("title", default: "")
           ],
           text(size: 8.5pt, fill: rgb("#6c757d"))[
-            #if metadata.at("group", default: none) != none [ Nhóm #metadata.group ]
-          ]
+            #if (
+              metadata.at("group", default: none) != none
+            ) [ Nhóm #metadata.group ]
+          ],
         )
         line(length: 100%, stroke: 0.5pt + rgb("#ced4da"))
       }
@@ -68,7 +78,7 @@
           ],
           text(size: 8.5pt, fill: rgb("#6c757d"), weight: "medium")[
             #counter(page).display()
-          ]
+          ],
         )
       }
     },
@@ -76,7 +86,7 @@
       draft-watermark(i18n("draft"), font: heading-font)
     } else {
       none
-    }
+    },
   )
 
   set text(
@@ -117,7 +127,7 @@
     radius: 4pt,
     stroke: 0.5pt + border-color,
     width: 100%,
-    it
+    it,
   )
 
   show figure.caption: it => [
