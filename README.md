@@ -1,5 +1,7 @@
 # Lab Report Template
 
+See [report.pdf](./report.pdf) or [report-monochrome.pdf](./report-monochrome.pdf)
+
 ## Goals
 
 This project aims to be a flexible typst template for writing lab reports.
