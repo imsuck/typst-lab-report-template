@@ -1,10 +1,12 @@
-#import "../i18n.typ": i18n as default-i18n
-#import "../styles.typ": draft-watermark
+#import "../styles.typ": draft-watermark, lang-state, palette-state
+#import "../i18n.typ": create-i18n
 
 #let cover-page(
   metadata: (:),
-  i18n: default-i18n,
-) = {
+) = context {
+  let palette = palette-state.get()
+  let i18n = create-i18n(default-lang: lang-state.get())
+
   let font-cfg = metadata.at("fonts", default: (:))
   let body-font = font-cfg.at("body", default: (
     "Libertinus Serif",
@@ -19,13 +21,17 @@
     footer: none,
     margin: (x: 2.5cm, top: 2cm, bottom: 2cm),
     background: if metadata.at("draft", default: false) {
-      draft-watermark(i18n("draft"), font: heading-font)
+      draft-watermark(
+        i18n("draft"),
+        font: heading-font,
+        fill: palette.watermark,
+      )
     } else {
       none
     },
     [
       #align(center)[
-        #text(size: 13pt, weight: "bold", fill: rgb("#002855"))[
+        #text(size: 13pt, weight: "bold", fill: palette.primary)[
           #upper(metadata.at(
             "school-name",
             default: "TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TP.HCM",
@@ -33,7 +39,7 @@
         ]
 
         #v(2pt)
-        #text(size: 12pt, weight: "bold", fill: rgb("#0056b3"))[
+        #text(size: 12pt, weight: "bold", fill: palette.secondary)[
           #upper(metadata.at("faculty-name", default: "KHOA ĐIỆN -- ĐIỆN TỬ"))
         ]
 
@@ -45,34 +51,34 @@
         #image(logo-path, width: 3.5cm)
 
         #v(1.2cm)
-        #text(size: 15pt, weight: "bold", fill: rgb("#002855"))[
+        #text(size: 15pt, weight: "bold", fill: palette.primary)[
           #upper(i18n("course")): #upper(metadata.at("course-name", default: ""))
         ]
 
         #v(4pt)
         #if metadata.at("course-code", default: none) != none [
-          #text(size: 12pt, weight: "medium", fill: rgb("#495057"))[
+          #text(size: 12pt, weight: "medium", fill: palette.text)[
             Mã môn học: #metadata.course-code
           ]
         ]
 
         #v(0.8cm)
-        #line(length: 60%, stroke: 1.5pt + rgb("#002855"))
+        #line(length: 60%, stroke: 1.5pt + palette.primary)
         #v(0.6cm)
 
-        #text(size: 18pt, weight: "bold", fill: rgb("#002855"))[
+        #text(size: 18pt, weight: "bold", fill: palette.primary)[
           #metadata.at("title", default: "BÁO CÁO THÍ NGHIỆM")
         ]
 
         #if metadata.at("subtitle", default: none) != none [
           #v(6pt)
-          #text(size: 13pt, style: "italic", fill: rgb("#495057"))[
+          #text(size: 13pt, style: "italic", fill: palette.muted)[
             #metadata.subtitle
           ]
         ]
 
         #v(0.6cm)
-        #line(length: 60%, stroke: 1.5pt + rgb("#002855"))
+        #line(length: 60%, stroke: 1.5pt + palette.primary)
       ]
 
       #v(1fr)
@@ -102,7 +108,7 @@
               center + horizon,
               center + horizon,
             ),
-            stroke: 0.5pt + rgb("#dee2e6"),
+            stroke: 0.5pt + palette.border,
             table.header(
               [\#],
               [#i18n("student-name")],
@@ -125,11 +131,10 @@
 
       #v(1fr)
       #align(center)[
-        #text(size: 10pt, fill: rgb("#6c757d"))[
+        #text(size: 10pt, fill: palette.muted)[
           #metadata.at("location", default: "TP. Hồ Chí Minh"), #metadata.at("date", default: datetime.today().display("[month repr:long] [year]"))
         ]
       ]
     ],
   )
 }
-

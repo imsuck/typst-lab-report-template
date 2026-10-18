@@ -2,7 +2,6 @@
 
 #grading-sheet(
   metadata: metadata,
-  i18n: i18n,
   criteria-list: (
     (
       criteria: "Chuẩn bị bài trước thí nghiệm (Pre-lab questions & design)",

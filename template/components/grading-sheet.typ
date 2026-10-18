@@ -1,4 +1,5 @@
-#import "../i18n.typ": i18n as default-i18n
+#import "../styles.typ": lang-state, palette-state
+#import "../i18n.typ": create-i18n
 
 #let grading-sheet(
   metadata: (:),
@@ -24,8 +25,10 @@
       score: "",
     ),
   ),
-  i18n: default-i18n,
-) = {
+) = context {
+  let palette = palette-state.get()
+  let i18n = create-i18n(default-lang: lang-state.get())
+
   v(0.5em)
   heading(level: 2, numbering: none, outlined: false)[#i18n("grading-sheet")]
 
@@ -37,7 +40,7 @@
       center + horizon,
       center + horizon,
     ),
-    stroke: 0.5pt + rgb("#dee2e6"),
+    stroke: 0.5pt + palette.border,
     table.header(
       [\#], [#i18n("criteria")], [#i18n("max-score")], [#i18n("awarded-score")]
     ),
@@ -57,7 +60,7 @@
 
   v(1em)
   block(
-    stroke: 0.5pt + rgb("#dee2e6"),
+    stroke: 0.5pt + palette.border,
     inset: 10pt,
     radius: 4pt,
     width: 100%,
@@ -71,4 +74,3 @@
     ],
   )
 }
-

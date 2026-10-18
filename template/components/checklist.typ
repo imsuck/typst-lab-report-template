@@ -1,13 +1,16 @@
-#import "../i18n.typ": i18n as default-i18n
+#import "../styles.typ": lang-state, palette-state
+#import "../i18n.typ": create-i18n
 
 #let checklist-table(
   title: none,
   items: (),
-  i18n: default-i18n,
-) = {
-  if title != none [
-    #heading(level: 2, numbering: none)[#title]
-  ]
+) = context {
+  let palette = palette-state.get()
+  let i18n = create-i18n(default-lang: lang-state.get())
+
+  if title != none {
+    heading(level: 2, numbering: none, title)
+  }
 
   table(
     columns: (auto, 1fr, 60pt, 80pt),
@@ -17,7 +20,7 @@
       center + horizon,
       center + horizon,
     ),
-    stroke: 0.5pt + rgb("#dee2e6"),
+    stroke: 0.5pt + palette.border,
     table.header(
       [\#], [#i18n("task")], [#i18n("status")], [#i18n("signature")]
     ),
@@ -43,4 +46,3 @@
       .flatten(),
   )
 }
-

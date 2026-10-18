@@ -1,4 +1,4 @@
-#import "styles.typ": apply-styles, primary-color, secondary-color
+#import "styles.typ": apply-styles, get-palette, lang-state, palette-state
 #import "i18n.typ": create-i18n, i18n
 #import "components/cover.typ": cover-page
 #import "components/checklist.typ": checklist-table
@@ -10,11 +10,18 @@
   metadata: (:),
   body,
 ) = {
-  // 1. Cover page
-  cover-page(metadata: metadata, i18n: i18n)
+  let lang = metadata.at("lang", default: "vi")
+  let doc-i18n = create-i18n(default-lang: lang)
 
-  // 2. Main styling wrapper
-  show: it => apply-styles(metadata: metadata, i18n: i18n, it)
+  // Initialize global states before any content renders (including cover-page)
+  palette-state.update(get-palette(metadata))
+  lang-state.update(lang)
+
+  // 1. Cover page
+  cover-page(metadata: metadata)
+
+  // 2. Main styling wrapper (also re-sets states for safety)
+  show: it => apply-styles(metadata: metadata, it)
 
   // 3. Front matter: Roman numerals for page numbering
   set page(numbering: "I")
@@ -23,7 +30,7 @@
   // Table of Contents
   if metadata.at("show-toc", default: false) {
     outline(
-      title: i18n("toc-title"),
+      title: doc-i18n("toc-title"),
       indent: auto,
       depth: 3,
     )
@@ -33,7 +40,7 @@
   // List of Figures if requested
   if metadata.at("show-lof", default: false) {
     outline(
-      title: i18n("lof-title"),
+      title: doc-i18n("lof-title"),
       target: figure.where(kind: image),
     )
     v(1.5em)
@@ -42,7 +49,7 @@
   // List of Tables if requested
   if metadata.at("show-lot", default: false) {
     outline(
-      title: i18n("lot-title"),
+      title: doc-i18n("lot-title"),
       target: figure.where(kind: table),
     )
     v(1.5em)
@@ -85,5 +92,3 @@
   }
   #set heading(offset: 0)
 ]
-
-

@@ -1,7 +1,6 @@
 #import "template/lib.typ": (
   add-chapter, alert-box, apply-styles, checklist-table, cover-page,
-  grading-sheet, lab-report, minitoc, primary-color, question-box,
-  secondary-color,
+  grading-sheet, lab-report, minitoc, question-box,
 )
 #import "template/i18n.typ": create-i18n
 
@@ -20,6 +19,7 @@
   date: "17 Tháng 10, 2026",
   instructor: "TS. Nguyễn Văn Hướng",
   lang: "vi", // "en|vi"
+  monochrome: false,
   draft: true,
   show-grading-sheet: true,
   show-toc: true,
@@ -44,4 +44,3 @@
 
 // Project-wide i18n instance configured with metadata's language
 #let i18n = create-i18n(default-lang: metadata.at("lang", default: "vi"))
-

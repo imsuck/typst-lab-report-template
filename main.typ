@@ -19,4 +19,3 @@
   #set page(numbering: (..) => "")
   #include "content/06-grading-sheet.typ"
 ]
-
