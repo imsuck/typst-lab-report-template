@@ -71,38 +71,34 @@
     margin: (x: 2.5cm, top: 2.5cm, bottom: 2.5cm),
     header: context {
       let page-num = counter(page).get().first()
-      if page-num > 1 {
-        grid(
-          columns: (1fr, auto),
-          align: (left, right),
-          text(size: 8.5pt, fill: palette.muted)[
-            #metadata.at("course-name", default: "Lab Report") - #metadata.at("title", default: "")
-          ],
-          text(size: 8.5pt, fill: palette.muted)[
-            #if metadata.at("group", default: none) != none [
-              Nhóm #metadata.group
-            ]
-          ],
-        )
-        line(length: 100%, stroke: 0.5pt + palette.rule)
-      }
+      grid(
+        columns: (1fr, auto),
+        align: (left, right),
+        text(size: 8.5pt, fill: palette.muted)[
+          #metadata.at("course-name", default: "Lab Report") - #metadata.at("title", default: "")
+        ],
+        text(size: 8.5pt, fill: palette.muted)[
+          #if metadata.at("group", default: none) != none [
+            Nhóm #metadata.group
+          ]
+        ],
+      )
+      line(length: 100%, stroke: 0.5pt + palette.rule)
     },
     footer: context {
       let page-num = counter(page).get().first()
-      if page-num > 1 {
-        line(length: 100%, stroke: 0.5pt + palette.rule)
-        v(2pt)
-        grid(
-          columns: (1fr, auto),
-          align: (left, right),
-          text(size: 8.5pt, fill: palette.muted)[
-            #metadata.at("school-name", default: "")
-          ],
-          text(size: 8.5pt, fill: palette.muted, weight: "medium")[
-            #counter(page).display()
-          ],
-        )
-      }
+      line(length: 100%, stroke: 0.5pt + palette.rule)
+      v(2pt)
+      grid(
+        columns: (1fr, auto),
+        align: (left, right),
+        text(size: 8.5pt, fill: palette.muted)[
+          #metadata.at("school-name", default: "")
+        ],
+        text(size: 8.5pt, fill: palette.muted, weight: "medium")[
+          #counter(page).display()
+        ],
+      )
     },
     background: if metadata.at("draft", default: false) {
       draft-watermark(
@@ -165,6 +161,14 @@
     #v(4pt)
     #text(size: 9.5pt, style: "italic")[#it]
   ]
+
+  // https://forum.typst.app/t/how-to-display-short-figure-caption-in-bold-and-long-in-italic/4246/2
+  show figure.caption: it => {
+    let numbering = if it.numbering != none {
+      [~] + context it.counter.display(it.numbering)
+    }
+    emph[*#it.supplement#numbering#it.separator*#it.body]
+  }
 
   show table.cell.where(y: 0): set text(weight: "bold", fill: white)
   set table(
