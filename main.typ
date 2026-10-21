@@ -1,7 +1,8 @@
 #import "metadata.typ": *
 
+#configure()
+
 #show: lab-report.with(
-  metadata: metadata,
   frontmatter: (
     (
       content: [
@@ -27,10 +28,8 @@
     ),
     (
       content: [
-        #if metadata.at("show-grading-sheet", default: true) [
-          #set page(numbering: (..) => "")
-          #include "content/99-grading-sheet.typ"
-        ]
+        #set page(numbering: (..) => "")
+        #include "content/99-grading-sheet.typ"
       ],
     ),
   ),

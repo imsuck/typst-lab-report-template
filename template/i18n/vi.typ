@@ -33,6 +33,7 @@
   post-checklist-title: "Kiểm tra nghiệm thu cuối buổi",
   exercise: "Bài tập / Thí nghiệm",
   question: "Câu hỏi",
+  answer: "Trả lời",
   result: "Kết quả thực nghiệm",
   discussion: "Bàn luận & Nhận xét",
   conclusion: "Kết luận",

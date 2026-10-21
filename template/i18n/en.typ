@@ -33,6 +33,7 @@
   post-checklist-title: "Post-Lab Submission Checklist",
   exercise: "Exercise",
   question: "Question",
+  answer: "Answer",
   result: "Result",
   discussion: "Discussion",
   conclusion: "Conclusion",

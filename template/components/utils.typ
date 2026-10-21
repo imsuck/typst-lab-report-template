@@ -1,12 +1,13 @@
-#import "../styles.typ": palette-state
+#import "../globals.typ": *
+#import "../i18n.typ": i18n
 
 #let alert-box(
   title: none,
   body,
   kind: "info",
 ) = context {
-  let palette = palette-state.get()
-  let (border-col, bg-col, icon-col) = if palette.mono {
+  let mono = config.get().monochrome
+  let (border-col, bg-col, icon-col) = if mono {
     // Monochrome: differentiate kinds by lightness only
     if kind == "warning" {
       (luma(55%), luma(95%), luma(35%))
@@ -29,7 +30,7 @@
 
   block(
     fill: bg-col,
-    stroke: (left: 3pt + border-col, rest: 0.5pt + palette.border),
+    stroke: (left: 3pt + border-col, rest: none),
     inset: (x: 12pt, y: 10pt),
     radius: (right: 4pt),
     width: 100%,
@@ -43,25 +44,19 @@
   )
 }
 
-#let question-box(num, prompt, solution: none) = context {
-  let palette = palette-state.get()
-  block(
-    fill: palette.bg-soft,
-    stroke: 0.5pt + palette.border,
-    inset: 10pt,
-    radius: 4pt,
-    width: 100%,
-    [
-      #text(weight: "bold", fill: palette.primary)[Câu hỏi #num:] #prompt
-      #if solution != none [
-        #v(6pt)
-        #line(length: 100%, stroke: 0.5pt + palette.rule)
-        #v(4pt)
-        #text(
-          weight: "bold",
-          fill: if palette.mono { palette.primary } else { rgb("#2b8a3e") },
-        )[Trả lời:] #solution
+#let question-box(num, prompt, solution: none) = block(
+  stroke: (left: 3pt + luma(35%), rest: none),
+  inset: (x: 12pt, y: 10pt),
+  width: 100%,
+  context [
+    #text(weight: "bold")[#i18n("question") #num: #prompt]
+
+    #if solution != none [
+      #text(size: 9pt, weight: "medium", fill: luma(35%))[
+        #i18n("answer")
       ]
-    ],
-  )
-}
+
+      #solution
+    ]
+  ],
+)

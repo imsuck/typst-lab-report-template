@@ -1,96 +1,28 @@
-#import "styles.typ": (
-  apply-styles, get-palette, in-outline, lang-state, palette-state,
-)
-#import "i18n.typ": create-i18n, i18n
-#import "components/cover.typ": cover-page
-#import "components/checklist.typ": checklist-table
-#import "components/grading-sheet.typ": grading-sheet
-#import "components/minitoc.typ": minitoc
-#import "components/utils.typ": alert-box, question-box
+#import "globals.typ": *
 
-#let lab-report(
-  metadata: (:),
-  frontmatter: (:),
-  backmatter: (:),
-  body,
-) = {
-  let lang = metadata.at("lang", default: "vi")
-  let doc-i18n = create-i18n(default-lang: lang)
-  let render-sections(sections) = {
-    if type(sections) == dictionary {
-      let sec = sections
+#import "styles.typ": apply-styles
+#import "i18n.typ": i18n
+#import "components/index.typ": *
+
+#let render-sections(sections) = {
+  if type(sections) == dictionary {
+    let sec = sections
+    if sec.at("pagebreak", default: false) { pagebreak() }
+    if sec.at("file", default: none) != none {
+      include "../" + sec.file
+    } else if sec.at("content", default: none) != none {
+      sec.content
+    }
+  } else {
+    for sec in sections {
       if sec.at("pagebreak", default: false) { pagebreak() }
       if sec.at("file", default: none) != none {
         include "../" + sec.file
       } else if sec.at("content", default: none) != none {
         sec.content
       }
-    } else {
-      for sec in sections {
-        if sec.at("pagebreak", default: false) { pagebreak() }
-        if sec.at("file", default: none) != none {
-          include "../" + sec.file
-        } else if sec.at("content", default: none) != none {
-          sec.content
-        }
-      }
     }
   }
-
-  // Initialize global states before any content renders (including cover-page)
-  palette-state.update(get-palette(metadata))
-  lang-state.update(lang)
-
-  // 1. Cover page
-  cover-page(metadata: metadata)
-
-  // 2. Main styling wrapper (also re-sets states for safety)
-  show: it => apply-styles(metadata: metadata, it)
-
-  // 3. Front matter: Roman numerals for page numbering
-  set page(numbering: "I")
-  counter(page).update(1)
-
-  render-sections(frontmatter)
-
-  // Table of Contents
-  if metadata.at("show-toc", default: false) {
-    outline(
-      title: doc-i18n("toc-title"),
-      indent: auto,
-      depth: 3,
-    )
-    v(1.5em)
-  }
-
-  // List of Figures if requested
-  if metadata.at("show-lof", default: false) {
-    outline(
-      title: doc-i18n("lof-title"),
-      target: figure.where(kind: image),
-    )
-    v(1.5em)
-  }
-
-  // List of Tables if requested
-  if metadata.at("show-lot", default: false) {
-    outline(
-      title: doc-i18n("lot-title"),
-      target: figure.where(kind: table),
-    )
-    v(1.5em)
-  }
-
-  pagebreak()
-
-  // 4. Body matter: Arabic numbering
-  set page(numbering: "1")
-  counter(page).update(1)
-  set heading(numbering: "1.1")
-
-  body
-
-  render-sections(backmatter)
 }
 
 // source: https://github.com/shonk-software/community-ostfalia-thesis/blob/50b5a0e64d390509125e69209727161fca0c88cd/lib/helpers.typ
@@ -142,3 +74,48 @@
 }
 
 #let eqref(label) = link(label)[(#ref(label, supplement: none))]
+
+#let lab-report(
+  frontmatter: (),
+  backmatter: (),
+  body,
+) = context {
+  show: apply-styles
+
+  let conf = config.get()
+
+  cover-page()
+
+  counter(page).update(1)
+  set page(numbering: "I")
+
+  render-sections(frontmatter)
+
+  if conf.show-toc {
+    outline(title: i18n("toc-title"))
+  }
+  if conf.show-lof {
+    outline(
+      title: i18n("lof-title"),
+      target: figure.where(kind: image),
+    )
+  }
+  if conf.show-lot {
+    outline(
+      title: i18n("lot-title"),
+      target: figure.where(kind: table),
+    )
+  }
+
+  pagebreak()
+  counter(page).update(1)
+  set page(numbering: "1")
+
+  body
+
+  pagebreak()
+  counter(page).update(1)
+  set page(numbering: "I")
+
+  render-sections(backmatter)
+}

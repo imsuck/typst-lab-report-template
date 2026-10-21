@@ -1,13 +1,9 @@
-#import "../styles.typ": lang-state, palette-state
-#import "../i18n.typ": create-i18n
+#import "../i18n.typ": i18n
 
 #let checklist-table(
   title: none,
   items: (),
-) = context {
-  let palette = palette-state.get()
-  let i18n = create-i18n(default-lang: lang-state.get())
-
+) = {
   if title != none {
     heading(level: 2, numbering: none, title)
   }
@@ -20,10 +16,7 @@
       center + horizon,
       center + horizon,
     ),
-    // stroke: 0.5pt + palette.border,
-    table.header(
-      [\#], [#i18n("task")], [#i18n("status")], [#i18n("signature")]
-    ),
+    table.header("#", i18n("task"), i18n("status"), i18n("signature")),
     ..items
       .enumerate()
       .map(((idx, item)) => {
