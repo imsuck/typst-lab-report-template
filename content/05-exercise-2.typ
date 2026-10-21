@@ -26,4 +26,4 @@ uint8_t read_button_debounced(void) {
 ```
 
 == Thảo luận kết quả
-Khi nhấn nút không có thuật toán lọc rung, quan sát trên máy hiện sóng ghi nhận chuỗi xung nhiễu kéo dài khoảng $5"ms" - 15"ms"$ do tiếp điểm cơ khí đàn hồi. Việc áp dụng thời gian trễ lọc rung $20"ms"$ đã loại bỏ hoàn toàn các xung kích sai, giúp đếm chính xác số lần nhấn phím.
+Khi nhấn nút không có thuật toán lọc rung, quan sát trên máy hiện sóng ghi nhận chuỗi xung nhiễu kéo dài khoảng 5ms -- 15ms do tiếp điểm cơ khí đàn hồi. Việc áp dụng thời gian trễ lọc rung 20ms đã loại bỏ hoàn toàn các xung kích sai, giúp đếm chính xác số lần nhấn phím.

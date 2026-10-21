@@ -1,5 +1,7 @@
 #import "i18n.typ": create-i18n
 
+#let in-outline = state("in-outline", false)
+
 #let draft-watermark(watermark-text, font: auto, fill: rgb(220, 53, 69, 35)) = {
   place(
     center + horizon,
@@ -169,6 +171,8 @@
     }
     emph[*#it.supplement#numbering#it.separator*#it.body]
   }
+
+  show outline: it => in-outline.update(true) + it + in-outline.update(false)
 
   show table.cell.where(y: 0): set text(weight: "bold", fill: white)
   set table(

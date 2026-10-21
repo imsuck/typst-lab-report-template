@@ -1,4 +1,6 @@
-#import "styles.typ": apply-styles, get-palette, lang-state, palette-state
+#import "styles.typ": (
+  apply-styles, get-palette, in-outline, lang-state, palette-state,
+)
 #import "i18n.typ": create-i18n, i18n
 #import "components/cover.typ": cover-page
 #import "components/checklist.typ": checklist-table
@@ -8,10 +10,32 @@
 
 #let lab-report(
   metadata: (:),
+  frontmatter: (:),
+  backmatter: (:),
   body,
 ) = {
   let lang = metadata.at("lang", default: "vi")
   let doc-i18n = create-i18n(default-lang: lang)
+  let render-sections(sections) = {
+    if type(sections) == dictionary {
+      let sec = sections
+      if sec.at("pagebreak", default: false) { pagebreak() }
+      if sec.at("file", default: none) != none {
+        include "../" + sec.file
+      } else if sec.at("content", default: none) != none {
+        sec.content
+      }
+    } else {
+      for sec in sections {
+        if sec.at("pagebreak", default: false) { pagebreak() }
+        if sec.at("file", default: none) != none {
+          include "../" + sec.file
+        } else if sec.at("content", default: none) != none {
+          sec.content
+        }
+      }
+    }
+  }
 
   // Initialize global states before any content renders (including cover-page)
   palette-state.update(get-palette(metadata))
@@ -26,6 +50,8 @@
   // 3. Front matter: Roman numerals for page numbering
   set page(numbering: "I")
   counter(page).update(1)
+
+  render-sections(frontmatter)
 
   // Table of Contents
   if metadata.at("show-toc", default: false) {
@@ -63,6 +89,8 @@
   set heading(numbering: "1.1")
 
   body
+
+  render-sections(backmatter)
 }
 
 // source: https://github.com/shonk-software/community-ostfalia-thesis/blob/50b5a0e64d390509125e69209727161fca0c88cd/lib/helpers.typ
@@ -94,9 +122,10 @@
   #set heading(offset: 0)
 ]
 
-#let in-outline = state("in-outline", false)
 #let flex-caption(short, long) = context {
-  if in-outline.get() [#short] else [#strong(short). #long]
+  if in-outline.get() { [#short] } else {
+    if (long == []) [#strong(short)] else [#strong(short). #long]
+  }
 }
 
 // https://forum.typst.app/t/how-to-conditionally-enable-equation-numbering-for-labeled-equations/977/2

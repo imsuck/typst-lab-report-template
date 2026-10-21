@@ -1,10 +1,8 @@
-#import "template/lib.typ": (
-  add-chapter, alert-box, apply-styles, checklist-table, cover-page,
-  grading-sheet, lab-report, minitoc, question-box,
-)
+#import "template/lib.typ": *
 #import "template/i18n.typ": create-i18n
 
 #let metadata = (
+  // identity
   title: [Báo Cáo Thí Nghiệm Vi Xử Lý],
   subtitle: [Bài 1: Khảo sát tập lệnh và lập trình GPIO trên vi điều khiển STM32],
   school-name: [Đại học Quốc gia TP. Hồ Chí Minh \ Trường Đại học Bách Khoa],
@@ -18,6 +16,17 @@
   location: "Phòng 304 B1, Cơ sở Lý Thường Kiệt",
   date: "17 Tháng 10, 2026",
   instructor: "TS. Nguyễn Văn Hướng",
+  members: (
+    (name: "Nguyễn Văn An", id: "2110001", role: "Trưởng nhóm / Phần cứng"),
+    (
+      name: "Trần Thị Bình",
+      id: "2110002",
+      role: "Lập trình / Thu thập dữ liệu",
+    ),
+    (name: "Lê Hoàng Cường", id: "2110003", role: "Báo cáo / Xử lý kết quả"),
+  ),
+
+  // display
   lang: "vi", // "en|vi"
   monochrome: false,
   draft: true,
@@ -30,15 +39,6 @@
     body: ("Times New Roman", "STIX Two Text"),
     code: "Fira Code",
     heading: ("Times New Roman", "STIX Two Text"),
-  ),
-  members: (
-    (name: "Nguyễn Văn An", id: "2110001", role: "Trưởng nhóm / Phần cứng"),
-    (
-      name: "Trần Thị Bình",
-      id: "2110002",
-      role: "Lập trình / Thu thập dữ liệu",
-    ),
-    (name: "Lê Hoàng Cường", id: "2110003", role: "Báo cáo / Xử lý kết quả"),
   ),
 )
 

@@ -19,7 +19,7 @@ Chân điều khiển LED được gắn vào `GPIOD Pin 12` (Green LED) trên S
     [`PD14`], [LED Đỏ (Red)], [Output Push-Pull, No-pull, High-Speed],
     [`PD15`], [LED Xanh dương (Blue)], [Output Push-Pull, No-pull, High-Speed],
   ),
-  caption: [Bảng phân bổ chân GPIO điều khiển dãy 4 LED trên Kit STM32F4],
+  caption: flex-caption[Bảng phân bổ chân GPIO điều khiển dãy 4 LED trên Kit STM32F4][],
 )
 
 == Mã nguồn thực thi
