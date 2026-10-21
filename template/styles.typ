@@ -22,8 +22,8 @@
   let mono = metadata.at("monochrome", default: false)
   (
     mono: mono,
-    primary: if mono { black } else { rgb("#030391") },
-    secondary: if mono { luma(40%) } else { rgb("#1488D8") },
+    primary: if mono { black } else { black },
+    secondary: if mono { luma(15%) } else { luma(15%) },
     accent: if mono { black } else { rgb("#d32f2f") },
     text: if mono { black } else { rgb("#212529") },
     bg-soft: if mono { luma(96%) } else { rgb("#f8f9fa") },
