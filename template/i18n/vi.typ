@@ -22,7 +22,7 @@
   student-name: "Họ và tên",
   student-id: "MSSV",
   role: "Phân công / Đóng góp",
-  instructor: "Cán bộ hướng dẫn",
+  instructor: "Giảng viên hướng dẫn",
   course: "Môn học",
   semester: "Học kỳ",
   academic-year: "Năm học",

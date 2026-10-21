@@ -27,9 +27,9 @@
   show-lot: true,
   // Font configurations
   fonts: (
-    body: "Times New Roman",
+    body: ("Times New Roman", "STIX Two Text"),
     code: "Fira Code",
-    heading: "Times New Roman",
+    heading: ("Times New Roman", "STIX Two Text"),
   ),
   members: (
     (name: "Nguyễn Văn An", id: "2110001", role: "Trưởng nhóm / Phần cứng"),
