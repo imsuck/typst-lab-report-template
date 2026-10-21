@@ -174,10 +174,10 @@
 
   show outline: it => in-outline.update(true) + it + in-outline.update(false)
 
-  show table.cell.where(y: 0): set text(weight: "bold", fill: white)
+  show table.cell.where(y: 0): set text(weight: "bold")
   set table(
-    fill: (x, y) => if y == 0 { palette.primary },
-    stroke: 0.5pt + palette.border,
+    stroke: (_x, y) => (top: if y == 1 { 1pt } else { 0pt }),
+    fill: (_x, y) => if calc.odd(y) { luma(90%) },
   )
 
   body

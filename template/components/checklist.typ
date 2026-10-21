@@ -20,7 +20,7 @@
       center + horizon,
       center + horizon,
     ),
-    stroke: 0.5pt + palette.border,
+    // stroke: 0.5pt + palette.border,
     table.header(
       [\#], [#i18n("task")], [#i18n("status")], [#i18n("signature")]
     ),

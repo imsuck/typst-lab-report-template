@@ -40,6 +40,7 @@
       center + horizon,
       center + horizon,
     ),
+    fill: none,
     stroke: 0.5pt + palette.border,
     table.header(
       [\#], [#i18n("criteria")], [#i18n("max-score")], [#i18n("awarded-score")]
