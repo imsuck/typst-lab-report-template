@@ -176,8 +176,8 @@
 
   show table.cell.where(y: 0): set text(weight: "bold")
   set table(
-    stroke: (_x, y) => (top: if y == 1 { 1pt } else { 0pt }),
-    fill: (_x, y) => if calc.odd(y) { luma(90%) },
+    stroke: (_x, y) => (top: if y <= 1 { 1pt } else { 0pt }, bottom: 1pt),
+    fill: (_x, y) => if calc.odd(y) { palette.bg-soft },
   )
 
   show link: set text(fill: blue)
