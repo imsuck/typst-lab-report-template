@@ -91,21 +91,23 @@
 
   render-sections(frontmatter)
 
-  if conf.show-toc {
+  if conf.show-toc and query(heading).len() > 0 {
     outline(title: i18n("toc-title"))
   }
-  if conf.show-lof {
+  show outline: set heading(outlined: true)
+  if conf.show-lof and query(figure.where(kind: image)).len() > 0 {
     outline(
       title: i18n("lof-title"),
       target: figure.where(kind: image),
     )
   }
-  if conf.show-lot {
+  if conf.show-lot and query(figure.where(kind: table)).len() > 0 {
     outline(
       title: i18n("lot-title"),
       target: figure.where(kind: table),
     )
   }
+  show outline: set heading(outlined: false)
 
   pagebreak()
   counter(page).update(1)
