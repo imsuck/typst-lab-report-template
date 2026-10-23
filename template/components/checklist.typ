@@ -5,7 +5,7 @@
   items: (),
 ) = {
   if title != none {
-    heading(level: 2, numbering: none, title)
+    heading(level: 2, numbering: none, outlined: false, title)
   }
 
   table(
