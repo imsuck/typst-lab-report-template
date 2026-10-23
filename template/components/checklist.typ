@@ -9,7 +9,7 @@
   let i18n = create-i18n(default-lang: lang-state.get())
 
   if title != none {
-    heading(level: 2, numbering: none, title)
+    heading(level: 2, numbering: none, outlined: false, title)
   }
 
   table(
