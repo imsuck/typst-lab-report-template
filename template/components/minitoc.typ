@@ -36,3 +36,30 @@
     line(length: length, stroke: stroke)
   }
 }
+// Chapter
+//
+#let add-chapter(
+  file: none,
+  heading-offset: 0,
+  after: none,
+  before: none,
+  pb: false,
+  minitoc-title: auto,
+  ..args,
+) = [
+  #if (after != none and before != none) {
+    minitoc(title: minitoc-title, after: after, before: before, indent: auto)
+    if pb {
+      pagebreak()
+    }
+  }
+  #set heading(offset: heading-offset)
+
+  #if (file != none) {
+    include file
+  } else if args.pos().len() > 0 {
+    args.pos().first()
+  }
+  #set heading(offset: 0)
+]
+

@@ -21,7 +21,7 @@
   members: "Danh sách thành viên",
   student-name: "Họ và tên",
   student-id: "MSSV",
-  role: "Phân công / Đóng góp",
+  role: "Phân công",
   instructor: "GVHD",
   course: "Môn học",
   semester: "Học kỳ",

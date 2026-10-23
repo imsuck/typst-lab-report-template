@@ -45,7 +45,11 @@
   // page layout
   set page(
     margin: conf("margin"),
-    background: draft-watermark(i18n("draft"), font: fonts.body),
+    background: if conf("format").draft {
+      draft-watermark(i18n("draft"), font: fonts.body)
+    } else {
+      none
+    },
   )
 
   // fonts
@@ -84,6 +88,8 @@
     it,
   )
 
+  // add colors to certain clickable stuff (doesn't apply to outline and some
+  // other things)
   show link: set text(fill: colors.link)
   show cite: set text(fill: colors.link)
 
