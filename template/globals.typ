@@ -2,11 +2,14 @@
 
 #let config = state("config", (
   lang: "vi",
-  monochrome: false,
-  draft: true,
-  show-toc: true,
-  show-lof: true,
-  show-lot: true,
+  format: (
+    monochrome: false,
+    fancy-cover: false,
+    draft: true,
+    show-toc: true,
+    show-lof: true,
+    show-lot: true,
+  ),
   fonts: (
     body: ("Times New Roman", "STIX Two Text"),
     code: "Fira Code",
@@ -23,7 +26,7 @@
     surface: color.oklch(97%, 0.005, 260deg),
     border: color.oklch(85%, 0.015, 260deg),
 
-    link: color.oklch(50%, 0.18, 260deg),
+    link: color.oklch(48%, 0.14, 260deg),
     heading: color.oklch(22%, 0.02, 260deg),
 
     success: color.oklch(50%, 0.14, 145deg),

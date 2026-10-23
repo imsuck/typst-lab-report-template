@@ -4,9 +4,10 @@
   name: [Đại học Quốc gia TP. Hồ Chí Minh \ Trường Đại học Bách Khoa],
   faculty: [Khoa Điện -- Điện tử \ Bộ môn Kỹ thuật Máy tính -- Viễn thông],
   location: "TP. HCM",
-  instructor: "TS. Nguyễn Văn Hướng",
+  instructor: "TS. Nguyễn Văn Hưởng",
   class: "L01",
   group: "04",
+  group-members: (),
 )
 
 #let doc = (
@@ -15,19 +16,26 @@
   date: "01/2021",
 )
 
-#let my-margin = (
-  left: 2.5cm,
-  right: 1.5cm,
-  top: 1.5cm,
-  bottom: 1.5cm,
+#let doc-format = (
+  draft: true,
+  fancy-cover: false,
+  margin: (
+    left: 2.5cm,
+    right: 1.5cm,
+    top: 1.5cm,
+    bottom: 1.5cm,
+  ),
 )
 
 #let configure() = config.update(conf => {
-  conf.school = my-school
-  conf.doc = doc
-
-  conf.monochrome = false
-  conf.margin = my-margin
-
-  conf
+  (
+    ..conf,
+    lang: "vi", // "en|vi"
+    school: my-school,
+    doc: doc,
+    format: conf.format + doc-format,
+  )
 })
+
+// you have to manually style the custom functions
+#let checklist-table = checklist-table.with(signature: false)
