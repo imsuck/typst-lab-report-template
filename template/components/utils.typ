@@ -29,7 +29,7 @@
 
   block(
     fill: bg-col,
-    stroke: (left: 3pt + border-col, rest: 0.5pt + palette.border),
+    stroke: (left: 3pt + border-col, rest: 0pt),
     inset: (x: 12pt, y: 10pt),
     radius: (right: 4pt),
     width: 100%,

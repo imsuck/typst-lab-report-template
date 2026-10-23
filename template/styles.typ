@@ -180,5 +180,8 @@
     fill: (_x, y) => if calc.odd(y) { luma(90%) },
   )
 
+  show link: set text(fill: blue)
+  show cite: set text(fill: blue)
+
   body
 }
