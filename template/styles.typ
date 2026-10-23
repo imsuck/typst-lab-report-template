@@ -1,6 +1,11 @@
 #import "globals.typ": *
+#import "i18n.typ": i18n
 
-#let draft-watermark(watermark-text, font: auto, fill: rgb(220, 53, 69, 35)) = {
+#let draft-watermark(
+  watermark-text,
+  font: auto,
+  fill: rgb(220, 53, 69, 63),
+) = {
   place(
     center + horizon,
     rotate(
@@ -27,23 +32,30 @@
       numbering(section_scheme, section)
     } else if subschemes.len() == 0 {
       numbering(section_scheme, ..nums.pos())
-    }
-    else {
+    } else {
       clean_numbering(..subschemes)(..subsections)
     }
   }
 }
 
 #let apply-styles(body) = context {
-  let fonts = config.get().fonts
+  let fonts = conf("fonts")
+  let colors = conf("colors")
 
+  // page layout
+  set page(
+    margin: conf("margin"),
+    background: draft-watermark(i18n("draft"), font: fonts.body),
+  )
+
+  // fonts
   set text(font: fonts.body)
+  show raw: set text(font: fonts.code)
 
   set heading(numbering: "1.1.1.1.")
 
   show figure.caption: it => [
-    #v(4pt)
-    #text(size: 9.5pt, style: "italic")[#it]
+    #text(style: "italic")[#it]
   ]
 
   // https://forum.typst.app/t/how-to-display-short-figure-caption-in-bold-and-long-in-italic/4246/2
@@ -56,11 +68,24 @@
 
   show outline: it => in-outline.update(true) + it + in-outline.update(false)
 
+  // tables
   show table.cell.where(y: 0): set text(weight: "bold")
   set table(
-    stroke: (_x, y) => (top: if y == 1 { 1pt } else { 0pt }),
-    fill: (_x, y) => if calc.odd(y) { luma(95%) },
+    stroke: (_x, y) => (top: if y <= 1 { 1pt } else { 0pt }, bottom: 1pt),
+    fill: (_x, y) => if calc.odd(y) { colors.surface },
   )
+
+  // codeblocks
+  show raw.where(block: true): it => block(
+    fill: luma(96%),
+    inset: 1em,
+    stroke: 0.5pt + colors.border,
+    width: 100%,
+    it,
+  )
+
+  show link: set text(fill: colors.link)
+  show cite: set text(fill: colors.link)
 
   body
 }

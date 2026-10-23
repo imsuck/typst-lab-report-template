@@ -1,32 +1,20 @@
 #import "../globals.typ": *
 #import "../i18n.typ": i18n
 
+#let bgify(col, lightness: 97%, chroma: 0.02) = {
+  let (_, _, h) = color.oklch(col).components(alpha: false)
+  color.oklch(lightness, chroma, h)
+}
+
 #let alert-box(
   title: none,
   body,
   kind: "info",
 ) = context {
-  let mono = config.get().monochrome
-  let (border-col, bg-col, icon-col) = if mono {
-    // Monochrome: differentiate kinds by lightness only
-    if kind == "warning" {
-      (luma(55%), luma(95%), luma(35%))
-    } else if kind == "danger" {
-      (luma(45%), luma(93%), luma(25%))
-    } else if kind == "success" {
-      (luma(50%), luma(94%), luma(30%))
-    } else {
-      (luma(60%), luma(96%), luma(40%))
-    }
-  } else if kind == "warning" {
-    (rgb("#ffc107"), rgb("#fff9db"), rgb("#d97706"))
-  } else if kind == "danger" {
-    (rgb("#dc3545"), rgb("#ffe3e3"), rgb("#b91c1c"))
-  } else if kind == "success" {
-    (rgb("#28a745"), rgb("#ebfbee"), rgb("#15803d"))
-  } else {
-    (rgb("#0d6efd"), rgb("#e7f5ff"), rgb("#1d4ed8"))
-  }
+  let colors = conf("colors")
+  let border-col = colors.at(kind)
+  let bg-col = bgify(colors.at(kind))
+  let icon-col = colors.at(kind)
 
   block(
     fill: bg-col,
@@ -49,10 +37,12 @@
   inset: (x: 12pt, y: 10pt),
   width: 100%,
   context [
+    #let colors = conf("colors")
+
     #text(weight: "bold")[#i18n("question") #num: #prompt]
 
     #if solution != none [
-      #text(size: 9pt, weight: "medium", fill: luma(35%))[
+      #text(size: 9pt, weight: "medium", fill: colors.muted)[
         #i18n("answer")
       ]
 
