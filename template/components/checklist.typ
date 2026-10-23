@@ -1,41 +1,66 @@
 #import "../i18n.typ": i18n
+#import "../utils.typ": flatten-none
 
 #let checklist-table(
   title: none,
+  numbered: true,
+  signature: true,
   items: (),
 ) = {
   if title != none {
-    heading(level: 2, numbering: none, outlined: false, title)
+    heading(level: 2, numbering: none, outlined: false)[#title]
+  }
+
+  let widths = flatten-none((
+    if numbered { (auto,) },
+    (1fr, 60pt),
+    if signature { (80pt,) },
+  ))
+
+  let aligns = flatten-none((
+    if numbered { (center + horizon,) },
+    (left + horizon, center + horizon),
+    if signature { (center + horizon,) },
+  ))
+
+  let headers = flatten-none((
+    if numbered { ("#",) },
+    (i18n("task"), i18n("status")),
+    if signature { (i18n("signature"),) },
+  ))
+
+  let make-row(item, idx) = {
+    let is-dict = type(item) == dictionary
+
+    let task = if is-dict {
+      item.at("task", default: "")
+    } else {
+      item
+    }
+
+    let status = if is-dict {
+      item.at("status", default: "[  ]")
+    } else {
+      "[  ]"
+    }
+
+    let note = if is-dict {
+      item.at("note", default: "")
+    } else {
+      ""
+    }
+
+    flatten-none((
+      if numbered { (str(idx + 1),) },
+      (task, status),
+      if signature { (note,) },
+    ))
   }
 
   table(
-    columns: (auto, 1fr, 60pt, 80pt),
-    align: (
-      center + horizon,
-      left + horizon,
-      center + horizon,
-      center + horizon,
-    ),
-    table.header("#", i18n("task"), i18n("status"), i18n("signature")),
-    ..items
-      .enumerate()
-      .map(((idx, item)) => {
-        let content = if type(item) == str or type(item) == content {
-          item
-        } else { item.at("task", default: "") }
-        let status = if type(item) == dictionary {
-          item.at("status", default: "[  ]")
-        } else { "[  ]" }
-        let note = if type(item) == dictionary {
-          item.at("note", default: "")
-        } else { "" }
-        (
-          str(idx + 1),
-          content,
-          status,
-          note,
-        )
-      })
-      .flatten(),
+    columns: widths,
+    align: aligns,
+    table.header(..headers),
+    ..items.enumerate().map(((idx, item)) => make-row(item, idx)).flatten(),
   )
 }
