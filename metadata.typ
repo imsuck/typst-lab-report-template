@@ -7,7 +7,15 @@
   instructor: "TS. Nguyễn Văn Hưởng",
   class: "L01",
   group: "04",
-  group-members: (),
+  group-members: (
+    (name: "Nguyễn Văn An", id: "2110001", role: "Trưởng nhóm / Phần cứng"),
+    (
+      name: "Trần Thị Bình",
+      id: "2110002",
+      role: "Lập trình / Thu thập dữ liệu",
+    ),
+    (name: "Lê Hoàng Cường", id: "2110003", role: "Báo cáo / Xử lý kết quả"),
+  ),
 )
 
 #let doc = (
