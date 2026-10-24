@@ -53,8 +53,9 @@
   )
 
   // fonts
-  set text(font: fonts.body)
+  set text(font: fonts.body, lang: conf("lang"))
   show raw: set text(font: fonts.code)
+  show heading: set text(font: fonts.heading)
 
   set heading(numbering: "1.1.1.1.")
 

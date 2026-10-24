@@ -40,13 +40,9 @@
     width: 100%,
     [
 
-      #text(weight: "bold")[#i18n("question") #num: #prompt]
+      *#i18n("question") #num: #prompt*
 
       #if solution != none [
-        #text(size: 9pt, weight: "medium", fill: colors.muted)[
-          #i18n("answer")
-        ]
-
         #solution
       ]
     ],

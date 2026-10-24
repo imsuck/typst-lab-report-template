@@ -34,4 +34,4 @@
 #include "content/04-exercise-1.typ"
 #include "content/05-exercise-2.typ"
 
-#bibliography("refs.bib", title: i18n("references-title"), style: "ieee")
+#bibliography("refs.bib", style: "ieee")

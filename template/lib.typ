@@ -40,7 +40,7 @@
   render-sections(frontmatter)
 
   if conf("format").show-toc and query(heading).len() > 0 {
-    outline(title: i18n("toc-title"))
+    outline()
   }
   show outline: set heading(outlined: true)
   if conf("format").show-lof and query(figure.where(kind: image)).len() > 0 {
