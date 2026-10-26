@@ -1,22 +1,13 @@
 #import "template/lib.typ": *
-#import "template/i18n.typ": create-i18n
 
-#let metadata = (
-  // identity
-  title: [Báo Cáo Thí Nghiệm Vi Xử Lý],
-  subtitle: [Bài 1: Khảo sát tập lệnh và lập trình GPIO trên vi điều khiển STM32],
-  school-name: [Đại học Quốc gia TP. Hồ Chí Minh \ Trường Đại học Bách Khoa],
-  faculty-name: [Khoa Điện -- Điện Tử \ Bộ môn Kỹ thuật Máy tính -- Viễn thông],
-  course-name: [Thí nghiệm Vi Xử Lý],
-  course-code: "EE3051",
+#let my-school = (
+  name: [Đại học Quốc gia TP. Hồ Chí Minh \ Trường Đại học Bách Khoa],
+  faculty: [Khoa Điện -- Điện tử \ Bộ môn Kỹ thuật Máy tính -- Viễn thông],
+  location: "TP. HCM",
+  instructor: "TS. Nguyễn Văn Hưởng",
   class: "L01",
   group: "04",
-  semester: "HK 242",
-  academic-year: "2024 - 2025",
-  location: "Phòng 304 B1, Cơ sở Lý Thường Kiệt",
-  date: "17 Tháng 10, 2026",
-  instructor: "TS. Nguyễn Văn Hướng",
-  members: (
+  group-members: (
     (name: "Nguyễn Văn An", id: "2110001", role: "Trưởng nhóm / Phần cứng"),
     (
       name: "Trần Thị Bình",
@@ -25,22 +16,34 @@
     ),
     (name: "Lê Hoàng Cường", id: "2110003", role: "Báo cáo / Xử lý kết quả"),
   ),
+)
 
-  // display
-  lang: "vi", // "en|vi"
-  monochrome: false,
+#let doc = (
+  title: "Bài 1: Khảo sát tập lệnh và lập trình GPIO trên vi điều khiển STM32",
+  subtitle: "Báo Cáo Thí Nghiệm Vi Xử Lý",
+  date: "01/2021",
+)
+
+#let doc-format = (
   draft: true,
-  show-grading-sheet: true,
-  show-toc: true,
-  show-lof: true,
-  show-lot: true,
-  // Font configurations
-  fonts: (
-    body: ("Times New Roman", "STIX Two Text"),
-    code: "Fira Code",
-    heading: ("Times New Roman", "STIX Two Text"),
+  fancy-cover: false,
+  margin: (
+    left: 2.5cm,
+    right: 1.5cm,
+    top: 1.5cm,
+    bottom: 1.5cm,
   ),
 )
 
-// Project-wide i18n instance configured with metadata's language
-#let i18n = create-i18n(default-lang: metadata.at("lang", default: "vi"))
+#let configure() = config.update(conf => {
+  (
+    ..conf,
+    lang: "vi", // "en|vi"
+    school: my-school,
+    doc: doc,
+    format: conf.format + doc-format,
+  )
+})
+
+// you have to manually style the custom functions
+#let checklist-table = checklist-table.with(signature: false)

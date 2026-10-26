@@ -1,35 +1,24 @@
-#import "../styles.typ": palette-state
+#import "../globals.typ": *
+#import "../i18n.typ": i18n
+
+#let bgify(col, lightness: 97%, chroma: 0.02) = {
+  let (_, _, h) = color.oklch(col).components(alpha: false)
+  color.oklch(lightness, chroma, h)
+}
 
 #let alert-box(
   title: none,
   body,
   kind: "info",
 ) = context {
-  let palette = palette-state.get()
-  let (border-col, bg-col, icon-col) = if palette.mono {
-    // Monochrome: differentiate kinds by lightness only
-    if kind == "warning" {
-      (luma(55%), luma(95%), luma(35%))
-    } else if kind == "danger" {
-      (luma(45%), luma(93%), luma(25%))
-    } else if kind == "success" {
-      (luma(50%), luma(94%), luma(30%))
-    } else {
-      (luma(60%), luma(96%), luma(40%))
-    }
-  } else if kind == "warning" {
-    (rgb("#ffc107"), rgb("#fff9db"), rgb("#d97706"))
-  } else if kind == "danger" {
-    (rgb("#dc3545"), rgb("#ffe3e3"), rgb("#b91c1c"))
-  } else if kind == "success" {
-    (rgb("#28a745"), rgb("#ebfbee"), rgb("#15803d"))
-  } else {
-    (rgb("#0d6efd"), rgb("#e7f5ff"), rgb("#1d4ed8"))
-  }
+  let colors = conf("colors")
+  let border-col = colors.at(kind)
+  let bg-col = bgify(colors.at(kind))
+  let icon-col = colors.at(kind)
 
   block(
     fill: bg-col,
-    stroke: (left: 3pt + border-col, rest: 0pt),
+    stroke: (left: 3pt + border-col, rest: none),
     inset: (x: 12pt, y: 10pt),
     radius: (right: 4pt),
     width: 100%,
@@ -44,24 +33,39 @@
 }
 
 #let question-box(num, prompt, solution: none) = context {
-  let palette = palette-state.get()
+  let colors = conf("colors")
   block(
-    fill: palette.bg-soft,
-    stroke: 0.5pt + palette.border,
-    inset: 10pt,
-    radius: 4pt,
+    stroke: (left: 3pt + colors.secondary, rest: none),
+    inset: (x: 12pt, y: 10pt),
     width: 100%,
     [
-      #text(weight: "bold", fill: palette.primary)[Câu hỏi #num:] #prompt
+
+      *#i18n("question") #num: #prompt*
+
       #if solution != none [
-        #v(6pt)
-        #line(length: 100%, stroke: 0.5pt + palette.rule)
-        #v(4pt)
-        #text(
-          weight: "bold",
-          fill: if palette.mono { palette.primary } else { rgb("#2b8a3e") },
-        )[Trả lời:] #solution
+        #solution
       ]
     ],
   )
 }
+
+#let flex-caption(short, long) = context {
+  if in-outline.get() { [#short] } else {
+    if (long == []) [#strong(short)] else [#strong(short). #long]
+  }
+}
+
+// https://forum.typst.app/t/how-to-conditionally-enable-equation-numbering-for-labeled-equations/977/2
+#let eq(eq, id: none) = {
+  set math.equation(
+    numbering: if id == none { none } else { "(1)" },
+  )
+
+  if id == none {
+    eq
+  } else {
+    [#eq #label(id)]
+  }
+}
+
+#let eqref(label) = link(label)[(#ref(label, supplement: none))]

@@ -1,140 +1,105 @@
-#import "../styles.typ": draft-watermark, lang-state, palette-state
-#import "../i18n.typ": create-i18n
+#import "../i18n.typ": i18n
+#import "../globals.typ": *
 
-#let cover-page(
-  metadata: (:),
-) = context {
-  let palette = palette-state.get()
-  let i18n = create-i18n(default-lang: lang-state.get())
+// fancy: adds an extra cover page for when you need an inner and outer cover
+#let cover-page(fancy: false) = context {
+  if fancy {
+    block(
+      inset: 0.6cm,
+      width: 100%,
+      height: 100%,
+      stroke: 2pt,
+      align(center)[
+        #text(weight: "bold", size: 16pt)[
+          #upper(conf("school").name) \
+          #upper(conf("school").faculty)
+        ]
+        #image("../assets/logos/hcmut-logo.png", width: 100pt)
 
-  let font-cfg = metadata.at("fonts", default: (:))
-  let body-font = font-cfg.at("body", default: (
-    "Libertinus Serif",
-    "Times New Roman",
-    "DejaVu Serif",
-  ))
-  let heading-font = font-cfg.at("heading", default: body-font)
+        #v(1fr) // malleable
 
-  set text(font: body-font)
-  page(
-    header: none,
-    footer: none,
-    margin: (x: 2.5cm, top: 2cm, bottom: 2cm),
-    background: if metadata.at("draft", default: false) {
-      draft-watermark(
-        i18n("draft"),
-        font: heading-font,
-        fill: palette.watermark,
-      )
-    } else {
-      none
-    },
-    [
-      #align(center)[
-        #text(size: 13pt, weight: "bold", fill: palette.primary)[
-          #upper(metadata.at(
-            "school-name",
-            default: "TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TP.HCM",
-          ))
+        #text(weight: "bold", size: 18pt)[
+          #upper(conf("doc").subtitle)
         ]
 
-        #v(2pt)
-        #text(size: 12pt, weight: "bold", fill: palette.secondary)[
-          #upper(metadata.at("faculty-name", default: "KHOA ĐIỆN -- ĐIỆN TỬ"))
+        #v(2em) // malleable
+
+        #text(weight: "bold", size: 22pt)[
+          #upper(conf("doc").title)
         ]
 
-        #v(1.2cm)
-        #let logo-path = metadata.at(
-          "logo",
-          default: "/template/assets/logos/hcmut-logo.png",
-        )
-        #image(logo-path, width: 3.5cm)
+        #v(1fr)
 
-        #v(1.2cm)
-        #text(size: 15pt, weight: "bold", fill: palette.primary)[
-          #upper(i18n("course")): #upper(metadata.at("course-name", default: ""))
-        ]
-
-        #v(4pt)
-        #if metadata.at("course-code", default: none) != none [
-          #text(size: 12pt, weight: "medium", fill: palette.text)[
-            Mã môn học: #metadata.course-code
+        #text(weight: "bold", size: 16pt)[
+          #upper[
+            #i18n("class-group") #conf("school").class, #i18n("group") #conf("school").group \
+            #i18n("instructor"): #conf("school").instructor
           ]
         ]
 
-        #v(0.8cm)
-        #line(length: 60%, stroke: 1.5pt + palette.primary)
-        #v(0.6cm)
+        #v(1fr)
 
-        #text(size: 18pt, weight: "bold", fill: palette.primary)[
-          #metadata.at("title", default: "BÁO CÁO THÍ NGHIỆM")
+        #text(weight: "bold", size: 16pt)[
+          #conf("school").location, #conf("doc").date
         ]
+      ],
+    )
 
-        #if metadata.at("subtitle", default: none) != none [
-          #v(6pt)
-          #text(size: 13pt, style: "italic", fill: palette.muted)[
-            #metadata.subtitle
-          ]
-        ]
+    pagebreak()
+  }
 
-        #v(0.6cm)
-        #line(length: 60%, stroke: 1.5pt + palette.primary)
+  align(center)[
+    #text(weight: "bold", size: 16pt)[
+      #upper(conf("school").name) \
+      #upper(conf("school").faculty)
+    ]
+    #image("../assets/logos/hcmut-logo.png", width: 100pt)
+
+    #v(1fr) // malleable
+
+    #text(weight: "bold", size: 18pt)[
+      #upper(conf("doc").subtitle)
+    ]
+
+    #v(2em) // malleable
+
+    #text(weight: "bold", size: 22pt)[
+      #upper(conf("doc").title)
+    ]
+
+    #v(1fr)
+
+    #text(weight: "bold", size: 16pt)[
+      #upper[
+        #i18n("class-group") #conf("school").class, #i18n("group") #conf("school").group \
       ]
+    ]
 
-      #v(1fr)
+    #text(weight: "bold", size: 11pt, i18n("members"))
+    #table(
+      columns: 4,
+      inset: (x: 1em, y: 0.75em),
+      table.header(
+        [\#], i18n("student-name"), i18n("student-id"), i18n("role")
+      ),
+      ..conf("school")
+        .group-members
+        .enumerate()
+        .map(((idx, member)) => (
+          str(idx + 1),
+          member.name,
+          member.id,
+          member.role,
+        ))
+        .flatten(),
+    )
 
-      #align(center)[
-        #block(width: 90%)[
-          #grid(
-            columns: (auto, 1fr),
-            row-gutter: 8pt,
-            column-gutter: 12pt,
-            [*#i18n("instructor"):*],
-            [#metadata.at("instructor", default: "ThS. Nguyễn Văn A")],
+    #v(1fr)
 
-            [*#i18n("class-group") / #i18n("group"):*],
-            [#metadata.at("class", default: "L01") - #i18n("group") #metadata.at("group", default: "01")],
+    #text(weight: "bold", size: 16pt)[
+      #conf("school").location, #conf("doc").date
+    ]
+  ]
 
-            [*#i18n("semester"):*],
-            [#metadata.at("semester", default: "HK 241") (#metadata.at("academic-year", default: "2024 - 2025"))],
-          )
-
-          #v(0.6em)
-          #table(
-            columns: (auto, 1fr, 80pt, 90pt),
-            align: (
-              center + horizon,
-              left + horizon,
-              center + horizon,
-              center + horizon,
-            ),
-            stroke: 0.5pt + palette.border,
-            table.header(
-              [\#],
-              [#i18n("student-name")],
-              [#i18n("student-id")],
-              [#i18n("role")],
-            ),
-            ..metadata
-              .at("members", default: ())
-              .enumerate()
-              .map(((idx, member)) => (
-                str(idx + 1),
-                member.name,
-                member.id,
-                member.at("role", default: "Thành viên"),
-              ))
-              .flatten(),
-          )
-        ]
-      ]
-
-      #v(1fr)
-      #align(center)[
-        #text(size: 10pt, fill: palette.muted)[
-          #metadata.at("location", default: "TP. Hồ Chí Minh"), #metadata.at("date", default: datetime.today().display("[month repr:long] [year]"))
-        ]
-      ]
-    ],
-  )
+  pagebreak()
 }

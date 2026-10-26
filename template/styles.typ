@@ -1,7 +1,11 @@
-#import "i18n.typ": create-i18n
-#import "globals.typ": in-outline
+#import "globals.typ": *
+#import "i18n.typ": i18n
 
-#let draft-watermark(watermark-text, font: auto, fill: rgb(220, 53, 69, 35)) = {
+#let draft-watermark(
+  watermark-text,
+  font: auto,
+  fill: rgb(220, 53, 69, 63),
+) = {
   place(
     center + horizon,
     rotate(
@@ -17,150 +21,46 @@
   )
 }
 
-#let get-palette(metadata) = {
-  let mono = metadata.at("monochrome", default: false)
-  (
-    mono: mono,
-    primary: if mono { black } else { black },
-    secondary: if mono { luma(15%) } else { luma(15%) },
-    accent: if mono { black } else { rgb("#d32f2f") },
-    text: if mono { black } else { rgb("#212529") },
-    bg-soft: if mono { luma(96%) } else { rgb("#f8f9fa") },
-    border: if mono { luma(80%) } else { rgb("#dee2e6") },
-    muted: if mono { luma(45%) } else { rgb("#6c757d") },
-    rule: if mono { luma(75%) } else { rgb("#ced4da") },
-    watermark: if mono { luma(85%) } else { rgb(220, 53, 69, 35) },
-  )
+// author: tromboneher
+// https://sitandr.github.io/typst-examples-book/book/snippets/numbering.html?highlight=clean%20heading#clean-numbering
+#let clean_numbering(..schemes) = {
+  (..nums) => {
+    let (section, ..subsections) = nums.pos()
+    let (section_scheme, ..subschemes) = schemes.pos()
+
+    if subsections.len() == 0 {
+      numbering(section_scheme, section)
+    } else if subschemes.len() == 0 {
+      numbering(section_scheme, ..nums.pos())
+    } else {
+      clean_numbering(..subschemes)(..subsections)
+    }
+  }
 }
 
-// Global states — set once by lab-report/apply-styles, readable by any component
-#let palette-state = state("palette", get-palette((:)))
-// Stores the language identifier (e.g. "vi", "en") — functions can't be stored in state
-#let lang-state = state("lang", "vi")
+#let apply-styles(body) = context {
+  let fonts = conf("fonts")
+  let colors = conf("colors")
 
-#let apply-styles(metadata: (:), body) = {
-  let palette = get-palette(metadata)
-  let lang = metadata.at("lang", default: "vi")
-  let doc-i18n = create-i18n(default-lang: lang)
-
-  // Update global states so all components can read them
-  palette-state.update(palette)
-  lang-state.update(lang)
-
-  // Font settings from metadata with fallbacks
-  let font-cfg = metadata.at("fonts", default: (:))
-  let body-font = font-cfg.at("body", default: (
-    "Libertinus Serif",
-    "Times New Roman",
-    "DejaVu Serif",
-  ))
-  let code-font = font-cfg.at("code", default: (
-    "DejaVu Sans Mono",
-    "Consolas",
-    "Courier New",
-  ))
-  let heading-font = font-cfg.at("heading", default: body-font)
-
-  set document(
-    title: metadata.at("title", default: "Lab Report"),
-    author: metadata.at("members", default: ()).map(m => m.name),
-    date: auto,
-  )
-
+  // page layout
   set page(
-    paper: "a4",
-    margin: (x: 2.5cm, top: 2.5cm, bottom: 2.5cm),
-    header: context {
-      let page-num = counter(page).get().first()
-      grid(
-        columns: (1fr, auto),
-        align: (left, right),
-        text(size: 8.5pt, fill: palette.muted)[
-          #metadata.at("course-name", default: "Lab Report") - #metadata.at("title", default: "")
-        ],
-        text(size: 8.5pt, fill: palette.muted)[
-          #if metadata.at("group", default: none) != none [
-            Nhóm #metadata.group
-          ]
-        ],
-      )
-      line(length: 100%, stroke: 0.5pt + palette.rule)
-    },
-    footer: context {
-      let page-num = counter(page).get().first()
-      line(length: 100%, stroke: 0.5pt + palette.rule)
-      v(2pt)
-      grid(
-        columns: (1fr, auto),
-        align: (left, right),
-        text(size: 8.5pt, fill: palette.muted)[
-          #metadata.at("school-name", default: "")
-        ],
-        text(size: 8.5pt, fill: palette.muted, weight: "medium")[
-          #counter(page).display()
-        ],
-      )
-    },
-    background: if metadata.at("draft", default: false) {
-      draft-watermark(
-        doc-i18n("draft"),
-        font: heading-font,
-        fill: palette.watermark,
-      )
+    margin: conf("margin"),
+    background: if conf("format").draft {
+      draft-watermark(i18n("draft"), font: fonts.body)
     } else {
       none
     },
   )
 
-  set text(
-    font: body-font,
-    size: 11pt,
-    lang: metadata.at("lang", default: "vi"),
-    fill: palette.text,
-  )
+  // fonts
+  set text(font: fonts.body, lang: conf("lang"))
+  show raw: set text(font: fonts.code)
+  show heading: set text(font: fonts.heading)
 
-  // Configure raw (code and codeblocks)
-  show raw: set text(font: code-font)
-
-  set par(
-    justify: true,
-    leading: 0.72em,
-    first-line-indent: 1.25em,
-  )
-
-  show heading: it => [
-    #v(1em, weak: true)
-    #text(font: heading-font, fill: palette.primary, weight: "bold")[
-      #it
-    ]
-    #v(0.6em, weak: true)
-  ]
-
-  show heading.where(level: 1): it => [
-    #v(1.4em, weak: true)
-    #text(
-      font: heading-font,
-      fill: palette.primary,
-      weight: "bold",
-      size: 1.3em,
-    )[
-      #it
-    ]
-    #v(0.8em, weak: true)
-  ]
-
-  show raw.where(block: true): it => block(
-    fill: palette.bg-soft,
-    inset: 8pt,
-    radius: 4pt,
-    stroke: 0.5pt + palette.border,
-    width: 100%,
-    it,
-  )
+  set heading(numbering: "1.1.1.1.")
 
   show figure.caption: it => [
-    #v(4pt)
-    #text(size: 9.5pt, style: "italic")[#it]
+    #text(style: "italic")[#it]
   ]
 
   // https://forum.typst.app/t/how-to-display-short-figure-caption-in-bold-and-long-in-italic/4246/2
@@ -173,14 +73,26 @@
 
   show outline: it => in-outline.update(true) + it + in-outline.update(false)
 
+  // tables
   show table.cell.where(y: 0): set text(weight: "bold")
   set table(
     stroke: (_x, y) => (top: if y <= 1 { 1pt } else { 0pt }, bottom: 1pt),
-    fill: (_x, y) => if calc.odd(y) { palette.bg-soft },
+    fill: (_x, y) => if calc.odd(y) { colors.surface },
   )
 
-  show link: set text(fill: blue)
-  show cite: set text(fill: blue)
+  // codeblocks
+  show raw.where(block: true): it => block(
+    fill: luma(96%),
+    inset: 1em,
+    stroke: 0.5pt + colors.border,
+    width: 100%,
+    it,
+  )
+
+  // add colors to certain clickable stuff (doesn't apply to outline and some
+  // other things)
+  show link: set text(fill: colors.link)
+  show cite: set text(fill: colors.link)
 
   body
 }

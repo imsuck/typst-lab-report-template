@@ -1,7 +1,8 @@
 #import "metadata.typ": *
 
+#configure()
+
 #show: lab-report.with(
-  metadata: metadata,
   frontmatter: (
     (
       content: [
@@ -18,20 +19,10 @@
   ),
   backmatter: (
     (
-      content: [#bibliography(
-          "refs.bib",
-          title: i18n("references-title"),
-          style: "ieee",
-        )
-      ],
-    ),
-    (
-      content: [
-        #if metadata.at("show-grading-sheet", default: true) [
-          #set page(numbering: (..) => "")
-          #include "content/99-grading-sheet.typ"
-        ]
-      ],
+      content: {
+        set page(numbering: (..) => "")
+        include "content/99-grading-sheet.typ"
+      },
     ),
   ),
 )
@@ -42,3 +33,5 @@
 #include "content/03-inclass-checklists.typ"
 #include "content/04-exercise-1.typ"
 #include "content/05-exercise-2.typ"
+
+#bibliography("refs.bib", style: "ieee")
