@@ -1,5 +1,6 @@
+#import "globals.typ": *
 #import "styles.typ": (
-  apply-styles, get-palette, in-outline, lang-state, palette-state,
+  apply-styles, get-palette, lang-state, palette-state,
 )
 #import "i18n.typ": create-i18n, i18n
 #import "components/cover.typ": cover-page

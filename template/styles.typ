@@ -1,6 +1,5 @@
 #import "i18n.typ": create-i18n
-
-#let in-outline = state("in-outline", false)
+#import "globals.typ": in-outline
 
 #let draft-watermark(watermark-text, font: auto, fill: rgb(220, 53, 69, 35)) = {
   place(
