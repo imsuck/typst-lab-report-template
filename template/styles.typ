@@ -23,7 +23,7 @@
 
 // author: tromboneher
 // https://sitandr.github.io/typst-examples-book/book/snippets/numbering.html?highlight=clean%20heading#clean-numbering
-#let clean_numbering(..schemes) = {
+#let clean-numbering(..schemes) = {
   (..nums) => {
     let (section, ..subsections) = nums.pos()
     let (section_scheme, ..subschemes) = schemes.pos()
@@ -33,7 +33,7 @@
     } else if subschemes.len() == 0 {
       numbering(section_scheme, ..nums.pos())
     } else {
-      clean_numbering(..subschemes)(..subsections)
+      clean-numbering(..subschemes)(..subsections)
     }
   }
 }
@@ -57,7 +57,7 @@
   show raw: set text(font: fonts.code)
   show heading: set text(font: fonts.heading)
 
-  set heading(numbering: "1.1.1.1.")
+  set heading(numbering: clean-numbering("I.", "1.1.1.1."))
 
   show figure.caption: it => [
     #text(style: "italic")[#it]
@@ -78,15 +78,6 @@
   set table(
     stroke: (_x, y) => (top: if y <= 1 { 1pt } else { 0pt }, bottom: 1pt),
     fill: (_x, y) => if calc.odd(y) { colors.surface },
-  )
-
-  // codeblocks
-  show raw.where(block: true): it => block(
-    fill: luma(96%),
-    inset: 1em,
-    stroke: 0.5pt + colors.border,
-    width: 100%,
-    it,
   )
 
   // add colors to certain clickable stuff (doesn't apply to outline and some

@@ -4,6 +4,9 @@
 #import "i18n.typ": i18n
 #import "components/index.typ": *
 
+#import "@preview/codly:2.0.0" as codly
+#import "@preview/codly-languages:0.1.8": codly-languages
+
 #let render-sections(sections) = {
   if type(sections) == dictionary {
     let sec = sections
@@ -31,6 +34,9 @@
   body,
 ) = context {
   show: apply-styles
+
+  show: codly.lang-set_(languages: codly-languages)
+  show raw.where(block: true): codly.new
 
   cover-page(fancy: conf("format").fancy-cover)
 
