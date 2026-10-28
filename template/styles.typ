@@ -84,6 +84,7 @@
   // other things)
   show link: set text(fill: colors.link)
   show cite: set text(fill: colors.link)
+  show ref: set text(fill: colors.link)
 
   body
 }
