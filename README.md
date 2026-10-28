@@ -6,6 +6,12 @@ See [report.pdf](./report.pdf) or [report-monochrome.pdf](./report-monochrome.pd
 
 This project aims to be a flexible typst template for writing lab reports.
 
+## TODOs
+
+Cool packages I plan to add to the template: [pillar](https://typst.app/universe/package/pillar),
+[hydra](https://typst.app/universe/package/hydra,), [algorythmst](https://typst.app/universe/package/algorythmst),
+[theorion](https://typst.app/universe/package/theorion).
+
 ## Project Structure
 
 ```

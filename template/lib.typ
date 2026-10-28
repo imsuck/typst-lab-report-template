@@ -8,22 +8,18 @@
 #import "@preview/codly-languages:0.1.8": codly-languages
 
 #let render-sections(sections) = {
-  if type(sections) == dictionary {
-    let sec = sections
+  let sections = if type(sections) == dictionary {
+    (sections,) // dealing with this case ((file: "a")), dict in parens
+  } else {
+    sections
+  }
+
+  for sec in sections {
     if sec.at("pagebreak", default: false) { pagebreak() }
     if sec.at("file", default: none) != none {
       include "../" + sec.file
     } else if sec.at("content", default: none) != none {
       sec.content
-    }
-  } else {
-    for sec in sections {
-      if sec.at("pagebreak", default: false) { pagebreak() }
-      if sec.at("file", default: none) != none {
-        include "../" + sec.file
-      } else if sec.at("content", default: none) != none {
-        sec.content
-      }
     }
   }
 }
@@ -48,6 +44,7 @@
   if conf("format").show-toc and query(heading).len() > 0 {
     outline()
   }
+  // to show LoF, LoT on the outline
   show outline: set heading(outlined: true)
   if conf("format").show-lof and query(figure.where(kind: image)).len() > 0 {
     outline(

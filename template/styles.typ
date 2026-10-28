@@ -76,7 +76,10 @@
   // tables
   show table.cell.where(y: 0): set text(weight: "bold")
   set table(
-    stroke: (_x, y) => (top: if y <= 1 { 1pt } else { 0pt }, bottom: 1pt),
+    stroke: (_x, y) => (
+      top: if y == 0 { 1.5pt } else if y == 1 { 0.5pt } else { 0pt },
+      bottom: 1.5pt,
+    ),
     fill: (_x, y) => if calc.odd(y) { colors.surface },
   )
 
