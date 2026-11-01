@@ -1,4 +1,4 @@
-#import "template/lib.typ": *
+#import "lib/lib.typ": *
 
 #let my-school = (
   name: [Đại học Quốc gia TP. Hồ Chí Minh \ Trường Đại học Bách Khoa],

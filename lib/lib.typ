@@ -12,7 +12,7 @@
 
 #let render-sections(sections) = {
   let sections = if type(sections) == dictionary {
-    (sections,) // dealing with this case ((file: "a")), dict in parens
+    (sections,) // dealing with this case: ((file: "a")), dict in parens
   } else {
     sections
   }
