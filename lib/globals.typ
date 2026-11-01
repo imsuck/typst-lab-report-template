@@ -1,3 +1,5 @@
+#import "@preview/linguify:0.5.0": linguify as i18n
+
 #let in-outline = state("in-outline", false)
 #let appx = state("appx", false)
 

@@ -1,8 +1,7 @@
 #import "globals.typ": *
 
 #import "styles.typ": apply-styles
-#import "i18n.typ": i18n
-#import "utils.typ": show-appendix
+#import "utils.typ": *
 #import "components/index.typ": *
 
 #import "@preview/codly:2.0.0" as codly

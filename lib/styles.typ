@@ -1,5 +1,4 @@
 #import "globals.typ": *
-#import "i18n.typ": i18n
 
 #let draft-watermark(
   watermark-text,

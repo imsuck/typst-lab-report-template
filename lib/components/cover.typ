@@ -1,4 +1,3 @@
-#import "../i18n.typ": i18n
 #import "../globals.typ": *
 
 // fancy: adds an extra cover page for when you need an inner and outer cover

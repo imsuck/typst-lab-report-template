@@ -1,7 +1,27 @@
-#import "globals.typ": appx
-#import "i18n.typ": i18n
+#import "globals.typ": appx, in-outline, i18n
 
 #let flatten-none(items) = items.flatten().filter(x => x != none)
+
+#let flex-caption(short, long) = context {
+  if in-outline.get() { [#short] } else {
+    if (long == []) [#strong(short)] else [#strong(short). #long]
+  }
+}
+
+// https://forum.typst.app/t/how-to-conditionally-enable-equation-numbering-for-labeled-equations/977/2
+#let eq(eq, id: none) = {
+  set math.equation(
+    numbering: if id == none { none } else { "(1)" },
+  )
+
+  if id == none {
+    eq
+  } else {
+    [#eq #label(id)]
+  }
+}
+
+#let eqref(label) = link(label)[(#ref(label, supplement: none))]
 
 #let show-appendix(body) = {
   set heading(numbering: "A.1.1.1.1", supplement: i18n("appendix-title"))
