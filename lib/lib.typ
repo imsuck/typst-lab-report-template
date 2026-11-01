@@ -62,9 +62,11 @@
 
   body
 
-  pagebreak()
-  counter(page).update(1)
-  set page(numbering: "I")
+  if backmatter.len() > 0 {
+    pagebreak()
+    counter(page).update(1)
+    set page(numbering: "I")
 
-  render-sections(backmatter)
+    render-sections(backmatter)
+  }
 }
