@@ -2,8 +2,9 @@
 #import "../globals.typ": *
 
 // fancy: adds an extra cover page for when you need an inner and outer cover
-#let cover-page(fancy: false) = context {
-  if fancy {
+#let cover-page(style: "simple") = {
+  if style == "none" { return }
+  if style == "fancy" {
     block(
       inset: 0.6cm,
       width: 100%,
@@ -71,7 +72,10 @@
 
     #text(weight: "bold", size: 16pt)[
       #upper[
-        #i18n("class-group") #conf("school").class, #i18n("group") #conf("school").group \
+        #i18n("class-group") #conf("school").class, #i18n("group") #conf("school").group
+        #if style == "simple" [
+          \ #i18n("instructor"): #conf("school").instructor
+        ]
       ]
     ]
 

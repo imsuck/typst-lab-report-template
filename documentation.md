@@ -43,13 +43,10 @@ even use it in text mode if you prefer `(1)` over `Equation 1`.
 
 ### Stylized boxes
 
-There are two kinds of stylized boxes that this template supports:
+This template uses [`gentle-clues:1.3.1`](https://typst.app/universe/package/gentle-clues) for admonitions and callout boxes (e.g. `warning`, `info`, `success`, `question`, `tip`, `danger`, etc.):
 
-- `alert-box(title: content | none, body, kind: "info" | "warning" | "error")`
-  These are quite eye-catchy. Don't over-use them.
-- `question-box(num, prompt, solution: content | none)`
-  Used specifically for questions with short answers (or maybe none). If you
-  need more space, switching over to standard prose might be better.
+- `#info(title: [...])[...]` or `#warning(title: [...])[...]` for alerts and notices.
+- `#question(title: [...])[...]` for exercise / pre-lab question boxes.
 
 ### References
 

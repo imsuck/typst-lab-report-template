@@ -49,7 +49,7 @@ int main(void) {
 ```
 
 == Kết quả & Nhận xét
-#alert-box(kind: "success", title: "Kết quả đo lường")[
+#success(title: "Kết quả đo lường")[
   - Đèn LED nhấp nháy đồng bộ với chu kỳ đo được trên máy hiện sóng $T = 1.002"s"$.
   - Mức logic cao đo được tại chân vi điều khiển là $3.28"V"$, đáp ứng chuẩn logic TTL/CMOS của STM32F4.
 ]

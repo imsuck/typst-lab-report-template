@@ -26,13 +26,7 @@
 
 #let doc-format = (
   draft: true,
-  fancy-cover: false,
-  margin: (
-    left: 2.5cm,
-    right: 1.5cm,
-    top: 1.5cm,
-    bottom: 1.5cm,
-  ),
+  cover-style: "simple",
 )
 
 #let configure() = config.update(conf => {

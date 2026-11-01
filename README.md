@@ -23,7 +23,8 @@ lab-report/                          # one report instance
 ├── template/                        # the reusable part (copy this folder between reports)
 │   ├── lib.typ                      # public API: the main show-rule + helpers
 │   ├── styles.typ                   # page setup, fonts, colors, numbering, headers/footers
-│   ├── i18n.typ                     # localization dictionary (or i18n/en.typ + i18n/vi.typ)
+│   ├── i18n.typ                     # localization helper using linguify
+│   ├── lang.toml                    # translation dictionary (TOML)
 │   ├── components/
 │   │   ├── cover.typ                # cover page (logo, faculty, group table…)
 │   │   ├── checklist.typ            # reusable checklist tables

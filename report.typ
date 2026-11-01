@@ -33,5 +33,20 @@
 #include "content/03-inclass-checklists.typ"
 #include "content/04-exercise-1.typ"
 #include "content/05-exercise-2.typ"
+#include "content/98-appendix.typ"
 
-#bibliography("refs.bib", style: "ieee")
+#{
+  // I want the inner content to be in English
+  set text(lang: "en")
+  bibliography(
+    "refs.bib",
+    style: "ieee",
+    title: context {
+      i18n(
+        "references-title",
+        lang: conf("lang"),
+      )
+    },
+  )
+  context { set text(lang: conf("lang")) }
+}

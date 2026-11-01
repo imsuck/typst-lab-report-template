@@ -1,11 +1,13 @@
 #let in-outline = state("in-outline", false)
+#let appx = state("appx", false)
 
 #let config = state("config", (
   lang: "vi",
   format: (
     monochrome: false,
-    fancy-cover: false,
+    cover-style: "simple", // "none|simple|fancy"
     draft: true,
+    margin: auto,
     show-toc: true,
     show-lof: true,
     show-lot: true,
@@ -34,7 +36,6 @@
     error: color.oklch(52%, 0.19, 25deg),
     info: color.oklch(55%, 0.15, 245deg),
   ),
-  margin: 2.5cm,
 ))
 
 #let conf(key) = config.get().at(key)

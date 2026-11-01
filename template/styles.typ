@@ -44,7 +44,7 @@
 
   // page layout
   set page(
-    margin: conf("margin"),
+    margin: conf("format").margin,
     background: if conf("format").draft {
       draft-watermark(i18n("draft"), font: fonts.body)
     } else {
@@ -57,7 +57,8 @@
   show raw: set text(font: fonts.code)
   show heading: set text(font: fonts.heading)
 
-  set heading(numbering: clean-numbering("I.", "1.1.1.1."))
+  // set heading(numbering: clean-numbering("I.", "1.1.1.1."))
+  set heading(numbering: "1.1.1.1.1")
 
   show figure.caption: it => [
     #text(style: "italic")[#it]
