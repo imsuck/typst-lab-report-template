@@ -1,4 +1,4 @@
-#import "../globals.typ": *
+#import "../state.typ": conf, i18n
 
 // fancy: adds an extra cover page for when you need an inner and outer cover
 #let cover-page(style: "simple") = {

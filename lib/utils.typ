@@ -1,4 +1,4 @@
-#import "globals.typ": appx, in-outline, i18n
+#import "state.typ": appx, in-outline, i18n
 
 #let flatten-none(items) = items.flatten().filter(x => x != none)
 
@@ -31,4 +31,21 @@
   heading(numbering: none, i18n("appendix-title"))
 
   body
+}
+
+#let render-sections(sections) = {
+  let sections = if type(sections) == dictionary {
+    (sections,) // dealing with this case: ((file: "a")), dict in parens
+  } else {
+    sections
+  }
+
+  for sec in sections {
+    if sec.at("pagebreak", default: false) { pagebreak() }
+    if sec.at("file", default: none) != none {
+      include "../" + sec.file
+    } else if sec.at("content", default: none) != none {
+      sec.content
+    }
+  }
 }

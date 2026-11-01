@@ -1,4 +1,4 @@
-#import "globals.typ": *
+#import "state.typ": conf, in-outline, i18n
 
 #let draft-watermark(
   watermark-text,

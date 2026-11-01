@@ -1,4 +1,4 @@
-#import "../globals.typ": i18n
+#import "../state.typ": i18n
 #import "../utils.typ": flatten-none
 
 #let checklist-table(

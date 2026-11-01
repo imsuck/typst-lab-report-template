@@ -1,4 +1,5 @@
-#import "globals.typ": *
+#import "state.typ": *
+#import "constants/index.typ": *
 
 #import "styles.typ": apply-styles
 #import "utils.typ": *
@@ -9,22 +10,6 @@
 #import "@preview/gentle-clues:1.3.1": *
 #import "@preview/linguify:0.5.0": set-database
 
-#let render-sections(sections) = {
-  let sections = if type(sections) == dictionary {
-    (sections,) // dealing with this case: ((file: "a")), dict in parens
-  } else {
-    sections
-  }
-
-  for sec in sections {
-    if sec.at("pagebreak", default: false) { pagebreak() }
-    if sec.at("file", default: none) != none {
-      include "../" + sec.file
-    } else if sec.at("content", default: none) != none {
-      sec.content
-    }
-  }
-}
 
 #let lab-report(
   frontmatter: (),
