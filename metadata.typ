@@ -1,5 +1,7 @@
 #import "lib/lib.typ": *
 
+// all possible config keys are in `lib/state.typ`
+
 #let my-school = (
   name: [Đại học Quốc gia TP. Hồ Chí Minh \ Trường Đại học Bách Khoa],
   faculty: [Khoa Điện -- Điện tử \ Bộ môn Kỹ thuật Máy tính -- Viễn thông],

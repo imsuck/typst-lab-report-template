@@ -6,7 +6,7 @@
 #let config = state("config", (
   lang: "vi",
   format: (
-    monochrome: false,
+    monochrome: false, // unplanned
     cover-style: "simple", // "none|simple|fancy"
     draft: true,
     show-toc: true,
@@ -19,6 +19,7 @@
     code: "Fira Code",
     heading: ("Times New Roman", "STIX Two Text"),
   ),
+  // also kinda unplanned
   colors: (
     primary: color.oklch(55%, 0.2, 260deg),
     secondary: color.oklch(55%, 0.03, 260deg),
