@@ -12,6 +12,8 @@ Cool packages I plan to add to the template: [pillar](https://typst.app/universe
 [hydra](https://typst.app/universe/package/hydra,), [algorythmst](https://typst.app/universe/package/algorythmst),
 [theorion](https://typst.app/universe/package/theorion).
 
+Indent settings in config.
+
 ## Project Structure
 
 ```
