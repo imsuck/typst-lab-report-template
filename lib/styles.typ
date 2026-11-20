@@ -1,4 +1,7 @@
 #import "state.typ": conf, i18n, in-outline
+#import "@preview/codly:2.0.0" as codly
+#import "@preview/codly-languages:0.1.8": codly-languages
+#import "@preview/outrageous:0.4.1"
 
 #let draft-watermark(
   watermark-text,
@@ -89,6 +92,16 @@
   show link: set text(fill: colors.link)
   show cite: set text(fill: colors.link)
   show ref: set text(fill: colors.link)
+
+  show: codly.lang-set_(languages: codly-languages)
+  show raw.where(block: true): codly.new
+  show outline.entry: outrageous.show-entry.with(
+    font: fonts.heading,
+  )
+  show outline.entry: it => {
+    show link: set text(fill: black)
+    it
+  }
 
   body
 }

@@ -5,11 +5,8 @@
 #import "utils.typ": *
 #import "components/index.typ": *
 
-#import "@preview/codly:2.0.0" as codly
-#import "@preview/codly-languages:0.1.8": codly-languages
 #import "@preview/gentle-clues:1.3.1": *
 #import "@preview/linguify:0.5.0": set-database
-#import "@preview/outrageous:0.4.1"
 
 
 #let lab-report(
@@ -20,16 +17,6 @@
   set-database(toml("lang.toml"))
 
   show: apply-styles
-
-  show: codly.lang-set_(languages: codly-languages)
-  show raw.where(block: true): codly.new
-  show outline.entry: outrageous.show-entry.with(
-    font: conf("fonts").heading,
-  )
-  show outline.entry: it => {
-    show link: set text(fill: black)
-    it
-  }
 
   cover-page(style: conf("format").cover-style)
 

@@ -13,15 +13,14 @@
 
         #lorem(50)
 
+        #let pvec(it) = $upright(bold(it))$
+
         $
-          cal(Z)[J] = integral cal(D)_phi.alt exp [i integral_(RR^(1,3)) (-1/2 partial_mu phi.alt partial^mu phi.alt - m^2/2 phi.alt^2 - lambda/4! phi.alt^4 + J phi.alt) dif^4 x]
+          (partial f)/(partial t) + pvec(v) dot nabla_pvec(x) f + pvec(F)/m dot nabla_pvec(v) f = integral.triple_(RR^3 times RR^3 times SS^2) B(norm(pvec(v) - pvec(v)_*), pvec(omega)) (f' f_*^' - f f_*) dif pvec(omega) dif pvec(v)_* dif pvec(x)
         $
 
         $
-          cal(L) = & -1/4 G_(mu nu)^a G^(a mu nu) - 1/4 W_(mu nu)^i W^(i mu nu) - 1/4 B_(mu nu) B^(mu nu) \
-                   & + sum_"generations" overline(psi)_f i gamma^mu D_mu psi_f \
-                   & + (D_mu H)^dagger (D^mu H) - mu^2 H^dagger H - lambda (H^dagger H)^2 \
-                   & - (y_u overline(Q)_L tilde(H) u_R + y_d overline(Q)_L H d_R + y_e overline(L)_L H e_R + "h.c.")
+          norm(f)_(B_(p,q)^S (RR^d)) = (sum_(j=-1)^oo 2^(j s q) norm(cal(F)^(-1) (phi_j (xi) hat(f) (xi)))_(L^p (RR^d))^q)^(1\/q)
         $
 
         #pagebreak()

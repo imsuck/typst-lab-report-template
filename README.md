@@ -62,3 +62,7 @@ lab-report/                          # one report instance
 | `content/*.typ` | Pure content. Each file starts with `#import "../template/lib.typ": *` (or a shorter alias) so it can use helpers. Keep them focused on one logical section. |
 | `refs.bib` | Standard BibTeX. Used with `#bibliography("refs.bib")` at the end (or wherever you want). |
 | `assets/` (both levels) | Template-level for logos that never change; report-level for experiment photos, hand-drawn schematics, simulation screenshots, etc. |
+
+## Acknowledgements
+
+School assets were taken from https://hcmut.edu.vn/gioi-thieu/nhan-dien-thuong-hieu
