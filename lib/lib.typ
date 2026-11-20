@@ -9,6 +9,7 @@
 #import "@preview/codly-languages:0.1.8": codly-languages
 #import "@preview/gentle-clues:1.3.1": *
 #import "@preview/linguify:0.5.0": set-database
+#import "@preview/outrageous:0.4.1"
 
 
 #let lab-report(
@@ -22,6 +23,13 @@
 
   show: codly.lang-set_(languages: codly-languages)
   show raw.where(block: true): codly.new
+  show outline.entry: outrageous.show-entry.with(
+    font: conf("fonts").heading,
+  )
+  show outline.entry: it => {
+    show link: set text(fill: black)
+    it
+  }
 
   cover-page(style: conf("format").cover-style)
 
@@ -31,13 +39,6 @@
   render-sections(frontmatter)
 
   if conf("format").show-toc and query(heading).len() > 0 {
-    // I wanted to put this in styles.typ but scoping would be an issue
-    show outline.entry.where(level: 1): set outline.entry(fill: none)
-    show outline.entry.where(level: 1): it => {
-      set block(above: 1.5em)
-      set text(weight: "bold")
-      it
-    }
     outline()
   }
   // to show LoF, LoT on the outline

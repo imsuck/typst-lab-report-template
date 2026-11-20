@@ -1,4 +1,4 @@
-#import "state.typ": conf, in-outline, i18n
+#import "state.typ": conf, i18n, in-outline
 
 #let draft-watermark(
   watermark-text,
@@ -55,6 +55,7 @@
   set text(font: fonts.body, lang: conf("lang"))
   show raw: set text(font: fonts.code)
   show heading: set text(font: fonts.heading)
+  show math.equation: set text(font: fonts.math)
 
   // set heading(numbering: clean-numbering("I.", "1.1.1.1."))
   set heading(numbering: "1.1.1.1.1")

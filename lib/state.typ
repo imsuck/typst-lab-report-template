@@ -15,9 +15,10 @@
     margin: auto,
   ),
   fonts: (
-    body: ("Times New Roman", "STIX Two Text"),
-    code: "Fira Code",
-    heading: ("Times New Roman", "STIX Two Text"),
+    body: ("STIX Two Text", "Times New Roman"),
+    heading: ("STIX Two Text", "Times New Roman"),
+    math: ("New Computer Modern Math"),
+    code: ("Fira Mono",),
   ),
   // also kinda unplanned
   colors: (

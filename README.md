@@ -14,6 +14,8 @@ Cool packages I plan to add to the template: [pillar](https://typst.app/universe
 
 Indent settings in config.
 
+Breakable math blocks (use `func.with(breakable: true)` or something like that).
+
 ## Project Structure
 
 ```

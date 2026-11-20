@@ -2,6 +2,7 @@
 
 // fancy: adds an extra cover page for when you need an inner and outer cover
 #let cover-page(style: "simple") = {
+  set par(justify: false)
   if style == "none" { return }
   if style == "fancy" {
     block(
