@@ -1,4 +1,4 @@
-#import "state.typ": conf, i18n, in-outline
+#import "state.typ": appx, conf, i18n, in-outline
 #import "@preview/codly:2.0.0" as codly
 #import "@preview/codly-languages:0.1.8": codly-languages
 #import "@preview/headcount:0.1.1": dependent-numbering, reset-counter
@@ -62,7 +62,14 @@
   set heading(numbering: "1.1.1.1")
   show heading: set text(size: fonts.at("size", default: 13pt))
   show heading.where(level: 1): it => {
-    pagebreak(weak: true)
+    if not appx.get() {
+      pagebreak(weak: true)
+    } else {
+      // first appendix and the appendix should be together
+      if counter(heading).get().first() != 1 {
+        pagebreak(weak: true)
+      }
+    }
     align(center, upper(it))
   }
   show heading.where(level: 2): it => upper(it)
