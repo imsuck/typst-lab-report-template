@@ -1,3 +1,4 @@
+#import "@preview/headcount:0.1.1": dependent-numbering
 #import "state.typ": appx, in-outline, i18n
 
 #let flatten-none(items) = items.flatten().filter(x => x != none)
@@ -11,7 +12,7 @@
 // https://forum.typst.app/t/how-to-conditionally-enable-equation-numbering-for-labeled-equations/977/2
 #let eq(eq, id: none) = {
   set math.equation(
-    numbering: if id == none { none } else { "(1)" },
+    numbering: if id == none { none } else { dependent-numbering("(1.1)") },
   )
 
   if id == none {

@@ -15,9 +15,12 @@
 
         #let pvec(it) = $upright(bold(it))$
 
-        $
-          (partial f)/(partial t) + pvec(v) dot nabla_pvec(x) f + pvec(F)/m dot nabla_pvec(v) f = integral.triple_(RR^3 times RR^3 times SS^2) B(norm(pvec(v) - pvec(v)_*), pvec(omega)) (f' f_*^' - f f_*) dif pvec(omega) dif pvec(v)_* dif pvec(x)
-        $
+        #eq(
+          id: "eq:boltzmann-transport",
+          $
+            (partial f)/(partial t) + pvec(v) dot nabla_pvec(x) f + pvec(F)/m dot nabla_pvec(v) f = integral.triple_(RR^3 times RR^3 times SS^2) B(norm(pvec(v) - pvec(v)_*), pvec(omega)) (f' f_*^' - f f_*) dif pvec(omega) dif pvec(v)_* dif pvec(x)
+          $,
+        )
 
         $
           norm(f)_(B_(p,q)^S (RR^d)) = (sum_(j=-1)^oo 2^(j s q) norm(cal(F)^(-1) (phi_j (xi) hat(f) (xi)))_(L^p (RR^d))^q)^(1\/q)

@@ -1,6 +1,7 @@
 #import "state.typ": conf, i18n, in-outline
 #import "@preview/codly:2.0.0" as codly
 #import "@preview/codly-languages:0.1.8": codly-languages
+#import "@preview/headcount:0.1.1": dependent-numbering, reset-counter
 #import "@preview/outrageous:0.4.1"
 
 #let draft-watermark(
@@ -62,6 +63,12 @@
 
   // set heading(numbering: clean-numbering("I.", "1.1.1.1."))
   set heading(numbering: "1.1.1.1.1")
+
+  // chapter-aware figure and equation numbering
+  set figure(numbering: dependent-numbering("1.1"))
+  show heading: reset-counter(counter(figure.where(kind: image)))
+  show heading: reset-counter(counter(figure.where(kind: table)))
+  show heading: reset-counter(counter(math.equation))
 
   show figure.caption: it => [
     #text(style: "italic")[#it]

@@ -21,7 +21,7 @@
   cover-page(style: conf("format").cover-style)
 
   counter(page).update(1)
-  set page(numbering: "I")
+  set page(numbering: "i")
 
   render-sections(frontmatter)
 
@@ -53,7 +53,7 @@
   if backmatter.len() > 0 {
     pagebreak()
     counter(page).update(1)
-    set page(numbering: "I")
+    set page(numbering: "i")
 
     render-sections(backmatter)
   }
