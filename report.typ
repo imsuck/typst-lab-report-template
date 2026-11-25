@@ -6,7 +6,8 @@
   frontmatter: (
     (
       content: [
-        #align(center)[#text(size: 18pt, weight: "bold")[LỜI CẢM ƠN]]
+        #align(center, block(text(size: 18pt, weight: "bold")[LỜI CẢM ƠN]))
+
         #lorem(50)
 
         #lorem(100)

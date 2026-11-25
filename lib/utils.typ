@@ -6,7 +6,7 @@
 
 #let flex-caption(short, long) = context {
   if in-outline.get() { [#short] } else {
-    if (long == []) [#strong(short)] else [#strong(short). #long]
+    if (long == []) [#emph(short)] else [#emph(short). #long]
   }
 }
 

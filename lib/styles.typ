@@ -42,6 +42,7 @@
 
   // Typography
   set text(font: fonts.body, lang: conf("lang"))
+  set par(justify: true, first-line-indent: conf("format").indent)
   show raw: set text(font: fonts.code)
   show heading: set text(font: fonts.heading)
   show math.equation: set text(font: fonts.math)
@@ -59,7 +60,7 @@
     let numbering = if it.numbering != none {
       [~] + context it.counter.display(it.numbering)
     }
-    emph[*#it.supplement#numbering#it.separator*#it.body]
+    [*#it.supplement#numbering#it.separator*#it.body]
   }
 
   // Outlines
@@ -86,6 +87,7 @@
     ),
     fill: (_x, y) => if calc.odd(y) { colors.surface },
   )
+  show table.cell: set par(justify: false)
 
   // Links & references
   show link: set text(fill: colors.link)
