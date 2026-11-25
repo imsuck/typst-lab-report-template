@@ -11,10 +11,10 @@ This project aims to be a flexible typst template for writing lab reports.
 - Packages to evaluate: [pillar](https://typst.app/universe/package/pillar), [hydra](https://typst.app/universe/package/hydra), [algorythmst](https://typst.app/universe/package/algorythmst), [theorion](https://typst.app/universe/package/theorion)
 - Breakable math blocks
 
-## Branches & Faculty Presets
+## Branches
 
-- `main`: General flexible template baseline for lab reports.
-- `feee`: Pre-configured to strictly follow the style guidelines of the **Faculty of Electrical & Electronics Engineering (FEEE / Khoa Điện – Điện tử)** at HCMUT (the only faculty publishing explicit public formatting specifications). Includes exact margins (40/25/40/25 mm), 13 pt body font, 1.25 cm paragraph indent, language-dependent line spacing (1.3× VI / 1.1× EN), per-level heading styling, automatic chapter pagebreaks, chapter-scoped figure/table/equation numbering, and top-positioned table captions. See [doc/hcmut-styling-reference.md](file:///home/imsuck/Yes/lab-report-template/doc/hcmut-styling-reference.md) for details.
+- `main`: Default template.
+- `feee`: Pre-configured for HCMUT Khoa Điện – Điện tử guidelines (see [doc/hcmut-styling-reference.md](./doc/hcmut-styling-reference.md)).
 
 ## Project Structure
 

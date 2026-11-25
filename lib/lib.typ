@@ -40,21 +40,21 @@
 
   // Frontmatter
   counter(page).update(1)
-  set page(numbering: "i")
+  set page(numbering: "i", number-align: center + bottom)
   render-sections(frontmatter)
   render-outlines(format)
 
   // Main body
   pagebreak()
   counter(page).update(1)
-  set page(numbering: "1")
+  set page(numbering: "1", number-align: center + bottom)
   body
 
   // Backmatter
   if not test.is-empty(backmatter) {
     pagebreak()
     counter(page).update(1)
-    set page(numbering: "i")
+    set page(numbering: "i", number-align: center + bottom)
     render-sections(backmatter)
   }
 }
