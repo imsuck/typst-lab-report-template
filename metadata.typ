@@ -28,7 +28,6 @@
 
 #let doc-format = (
   draft: true,
-  margin: auto,
   cover-style: "simple",
 )
 

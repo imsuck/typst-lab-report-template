@@ -33,6 +33,7 @@
   // Page layout
   set page(
     margin: format.margin,
+    number-align: center + bottom,
     background: if format.draft {
       draft-watermark(i18n("draft"), font: fonts.body)
     } else {
@@ -41,21 +42,41 @@
   )
 
   // Typography
-  set text(font: fonts.body, lang: conf("lang"))
-  set par(justify: true, first-line-indent: conf("format").indent)
+  let leading-spacing = if conf("lang") == "vi" { 0.65em * 1.3 } else { 0.65em * 1.1 }
+  set text(
+    font: fonts.body,
+    size: fonts.at("size", default: 13pt),
+    lang: conf("lang"),
+  )
+  set par(
+    justify: true,
+    first-line-indent: conf("format").indent,
+    leading: leading-spacing,
+    spacing: 13pt,
+  )
   show raw: set text(font: fonts.code)
   show heading: set text(font: fonts.heading)
   show math.equation: set text(font: fonts.math)
 
   // Headings & chapter-aware numbering
-  set heading(numbering: "1.1.1.1.1")
+  set heading(numbering: "1.1.1.1")
+  show heading: set text(size: fonts.at("size", default: 13pt))
+  show heading.where(level: 1): it => {
+    pagebreak(weak: true)
+    align(center, upper(it))
+  }
+  show heading.where(level: 2): it => upper(it)
+  show heading.where(level: 4): emph
+
   set figure(numbering: dependent-numbering("1.1"))
   show heading: reset-counter(counter(figure.where(kind: image)))
   show heading: reset-counter(counter(figure.where(kind: table)))
   show heading: reset-counter(counter(math.equation))
 
   // Figures & captions
+  show figure.where(kind: table): set figure.caption(position: top)
   // https://forum.typst.app/t/how-to-display-short-figure-caption-in-bold-and-long-in-italic/4246/2
+  show figure.caption: set text(size: 12pt)
   show figure.caption: it => {
     let numbering = if it.numbering != none {
       [~] + context it.counter.display(it.numbering)

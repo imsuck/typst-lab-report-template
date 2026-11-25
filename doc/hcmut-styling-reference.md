@@ -26,10 +26,10 @@ Aggregated from: HCMUT official pages (hcmut.edu.vn), Khoa Điện – Điện t
 |---|---|---|---|
 | Paper size | **A4** (210 × 297 mm) | A4 | Typst default (A4) ✓ |
 | Printing | **Single-sided** | Single-sided | — |
-| Left margin (Lề trái) | **40 mm** | 30–35 mm | `auto` ≈ 25 mm ❌ |
-| Right margin (Lề phải) | **25 mm** | 20 mm | `auto` ≈ 25 mm |
-| Top margin (Lề trên) | **40 mm** | 20–35 mm | `auto` ≈ 25 mm ❌ |
-| Bottom margin (Lề dưới) | **25 mm** | 20–30 mm | `auto` ≈ 25 mm |
+| Left margin (Lề trái) | **40 mm** | 30–35 mm | ✓ |
+| Right margin (Lề phải) | **25 mm** | 20 mm | ✓ |
+| Top margin (Lề trên) | **40 mm** | 20–35 mm | ✓ |
+| Bottom margin (Lề dưới) | **25 mm** | 20–30 mm | ✓ |
 
 The wide **left margin (40 mm)** is the binding allowance (gáy sách). No separate gutter field.
 
@@ -47,7 +47,7 @@ margin: (left: 40mm, right: 25mm, top: 40mm, bottom: 25mm)
 | Parameter | FEEE Spec | Current Template |
 |---|---|---|
 | Font family | **Times New Roman** (Unicode / UTF-8) | STIX Two Text → Times New Roman ✓ |
-| Font size | **13 pt** | 11 pt (Typst default) ❌ |
+| Font size | **13 pt** | 13 pt ✓ |
 | Encoding | Unicode UTF-8 mandatory; VNI/.VnTime **forbidden** | UTF-8 ✓ |
 
 > [!NOTE]
@@ -100,10 +100,10 @@ needs explicit `position: top` in Typst figure syntax.
 
 | Parameter | FEEE Spec | General HCMUT | Current Template |
 |---|---|---|---|
-| Justification | **Justified** (canh đều hai bên) | Justified | Not set ❌ |
-| First-line indent | **1.25 cm** (= 1 tab stop) | 1.25 cm | Not set ❌ |
-| Line spacing — Vietnamese | **1.3×** | 1.5× | Typst default ❌ |
-| Line spacing — English | **1.1×** | — | Typst default ❌ |
+| Justification | **Justified** (canh đều hai bên) | Justified | Justified ✓ |
+| First-line indent | **1.25 cm** (= 1 tab stop) | 1.25 cm | 1.25 cm ✓ |
+| Line spacing — Vietnamese | **1.3×** | 1.5× | 1.3× ✓ |
+| Line spacing — English | **1.1×** | — | 1.1× ✓ |
 | Paragraph spacing before | 3–6 pt | 3–6 pt | Typst default |
 | Paragraph spacing after | 3–6 pt | 3–6 pt | Typst default |
 | Character spacing | Normal (no condensing) | Normal | ✓ |
@@ -161,7 +161,7 @@ many templates leave headers blank. This template's current blank header is acce
   the booktabs-style in this template is a modern deviation that is not prohibited.
 - **Header row**: Bold.
 - **Alignment**: Left for text, center for numbers/status columns.
-- **Numbering**: Per-chapter (`Bảng 1.1`, `Bảng 2.3`). Current template uses global numbering ❌.
+- **Numbering**: Per-chapter (`Bảng 1.1`, `Bảng 2.3`) ✓.
 
 ---
 
@@ -172,8 +172,7 @@ many templates leave headers blank. This template's current blank header is acce
 - **Source citation**: If image is from an external source, cite below the caption.
 - **In-text reference**: Every figure must be referenced in the body text before it appears
   (e.g., "như thể hiện ở Hình 1.1").
-- **Numbering**: Per-chapter (`Hình 1.1`, `Hình 1.2`, ..., `Hình 2.1`).
-  Current template uses global numbering ❌.
+- **Numbering**: Per-chapter (`Hình 1.1`, `Hình 1.2`, ..., `Hình 2.1`) ✓.
 
 ```typst
 // Reset figure counter at each chapter heading (styles.typ):
@@ -195,7 +194,7 @@ set figure(numbering: n => {
 
 | Parameter | FEEE Spec | Current Template |
 |---|---|---|
-| Numbering format | **(chapter.number)** e.g. `(3.2)` | Global `"(1)"` ❌ |
+| Numbering format | **(chapter.number)** e.g. `(3.2)` | Per-chapter `"(1.1)"` ✓ |
 | Number placement | Right-aligned, same line | Right-aligned ✓ |
 | Equation alignment | Centered | Centered ✓ |
 | When to number | Only equations referenced in text | Selective via `eq()` helper ✓ |
@@ -321,12 +320,19 @@ Cover → Lời cảm ơn (frontmatter) → ToC / LoF / LoT → main chapters �
 
 | Feature | Status |
 |---|---|
+| Margins (40/25/40/25 mm) | ✓ |
 | Font family (STIX Two Text → Times New Roman) | ✓ |
-| Heading numbering (`"1.1.1.1.1"`, Arabic) | ✓ |
+| Body font size (13 pt) | ✓ |
+| Headings style & per-level caps/weight | ✓ |
+| Heading numbering (`"1.1.1.1"`, Arabic) | ✓ |
+| Paragraph justification & indent (1.25 cm) | ✓ |
+| Line spacing (1.3× VI, 1.1× EN) | ✓ |
+| Chapter automatic pagebreak | ✓ |
 | Citation style (`ieee`) | ✓ |
 | Figure caption: bold supplement + italic body, below | ✓ |
 | Table caption: above | ✓ |
-| Page numbering zones (Roman front, Arabic body) | ✓ |
+| Per-chapter figure, table, and equation numbering | ✓ |
+| Page numbering zones (Roman front, Arabic body, center + bottom) | ✓ |
 | Cover page structure and fields | ✓ |
 | Vietnamese + English i18n | ✓ |
 | IEEE bibliography | ✓ |
@@ -334,20 +340,19 @@ Cover → Lời cảm ơn (frontmatter) → ToC / LoF / LoT → main chapters �
 
 ---
 
-## 13. Confirmed Gaps / Things to Fix
+## 13. Summary of FEEE Style Implementation
 
-| # | What | Where | Fix |
-|---|---|---|---|
-| 1 | Margins wrong (auto ≈ 25mm, should be 40/25/40/25mm) | `state.typ` default, `styles.typ` | Set explicit margin in `format.margin` default |
-| 2 | Body font size 11pt, should be 13pt | `state.typ` fonts config | Add `size: 13pt` to fonts config or format config |
-| 3 | No `set par(justify, first-line-indent, leading)` | `styles.typ` `apply-styles` | Add `set par(justify: true, first-line-indent: 1.25cm, leading: ...)` |
-| 4 | Line spacing not set (should be 1.3× VI, 1.1× EN) | `styles.typ` | Set `leading` conditionally on `conf("lang")` |
-| 5 | Heading caps/alignment not enforced by level | `styles.typ` | Add level-specific `show heading` rules |
-| 6 | No automatic chapter pagebreak | `styles.typ` | `show heading.where(level: 1): it => { pagebreak(weak: true); ... }` |
-| 7 | Equation numbering global `"(1)"`, should be per-chapter `"(1.1)"` | `utils.typ` `eq()` | Update numbering lambda to prefix chapter counter |
-| 8 | Figure/table numbering global, should be per-chapter | `styles.typ` | Reset counters at H1; use chapter-prefixed numbering string |
-| 9 | Page number alignment not set (should be center + bottom) | `styles.typ` / `lib.typ` | `set page(number-align: center + bottom)` |
-| 10 | Table `position: top` for caption not set | `styles.typ` or usage sites | Use `figure(..., caption: ..., ...) ` with `set figure(placement: none)` and position top per kind |
+All 10 styling gaps identified for FEEE guidelines have been resolved on the `feee` branch:
+1. Margins set to 40mm left, 25mm right, 40mm top, 25mm bottom (`lib/state.typ`).
+2. Body font size set to 13pt (`lib/state.typ`, `lib/styles.typ`).
+3. Justification enabled and first-line indent set to 1.25cm (`lib/styles.typ`, `lib/state.typ`).
+4. Line spacing set to 1.3× for Vietnamese and 1.1× for English (`lib/styles.typ`).
+5. Heading capitalization and alignment by level (H1 center uppercase bold, H2 uppercase bold, H3 bold, H4 italic) (`lib/styles.typ`).
+6. Automatic chapter pagebreak (`show heading.where(level: 1): pagebreak(weak: true)`).
+7. Equation numbering chapter-scoped `(1.1)` / `(A.1)` (`lib/utils.typ`, `lib/styles.typ`).
+8. Figure and table numbering chapter-scoped (`1.1`) (`lib/styles.typ`).
+9. Page number alignment set to `center + bottom` across all zones (`lib/lib.typ`, `lib/styles.typ`).
+10. Table caption position set to top (`lib/styles.typ`).
 
 ---
 

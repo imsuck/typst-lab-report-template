@@ -12,15 +12,11 @@
     show-toc: true,
     show-lof: true,
     show-lot: true,
-    margin: (
-      left: 40mm,
-      right: 25mm,
-      top: 40mm,
-      bottom: 25mm,
-    ),
-    indent: (amount: 0cm, all: false), // idk what to set for now
+    margin: (left: 40mm, right: 25mm, top: 40mm, bottom: 25mm),
+    indent: 1.25cm,
   ),
   fonts: (
+    size: 13pt,
     body: ("STIX Two Text", "Times New Roman"),
     heading: ("STIX Two Text", "Times New Roman"),
     math: "New Computer Modern Math",
