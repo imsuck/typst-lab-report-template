@@ -9,52 +9,52 @@
 #import "@preview/linguify:0.5.0": set-database
 
 
+#let render-outlines(format) = {
+  if format.show-toc and query(heading).len() > 0 {
+    outline()
+  }
+
+  // Show LoF and LoT in the table of contents
+  show outline: set heading(outlined: true)
+  for (flag, title-key, kind) in (
+    ("show-lof", "lof-title", image),
+    ("show-lot", "lot-title", table),
+  ) {
+    if format.at(flag) and query(figure.where(kind: kind)).len() > 0 {
+      outline(title: i18n(title-key), target: figure.where(kind: kind))
+    }
+  }
+}
+
 #let lab-report(
   frontmatter: (),
   backmatter: (),
   body,
 ) = context {
+  let format = conf("format")
   set-database(toml("lang.toml"))
 
   show: apply-styles
 
-  cover-page(style: conf("format").cover-style)
+  cover-page(style: format.cover-style)
 
+  // Frontmatter
   counter(page).update(1)
   set page(numbering: "i")
-
   render-sections(frontmatter)
+  render-outlines(format)
 
-  if conf("format").show-toc and query(heading).len() > 0 {
-    outline()
-  }
-  // to show LoF, LoT on the outline
-  show outline: set heading(outlined: true)
-  if conf("format").show-lof and query(figure.where(kind: image)).len() > 0 {
-    outline(
-      title: i18n("lof-title"),
-      target: figure.where(kind: image),
-    )
-  }
-  if conf("format").show-lot and query(figure.where(kind: table)).len() > 0 {
-    outline(
-      title: i18n("lot-title"),
-      target: figure.where(kind: table),
-    )
-  }
-  show outline: set heading(outlined: false)
-
+  // Main body
   pagebreak()
   counter(page).update(1)
   set page(numbering: "1")
-
   body
 
-  if backmatter.len() > 0 {
+  // Backmatter
+  if not test.is-empty(backmatter) {
     pagebreak()
     counter(page).update(1)
     set page(numbering: "i")
-
     render-sections(backmatter)
   }
 }
