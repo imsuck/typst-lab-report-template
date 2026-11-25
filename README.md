@@ -9,7 +9,6 @@ This project aims to be a flexible typst template for writing lab reports.
 ## TODO
 
 - Packages to evaluate: [pillar](https://typst.app/universe/package/pillar), [hydra](https://typst.app/universe/package/hydra), [algorythmst](https://typst.app/universe/package/algorythmst), [theorion](https://typst.app/universe/package/theorion)
-- Indent settings in config
 - Breakable math blocks
 
 ## Project Structure

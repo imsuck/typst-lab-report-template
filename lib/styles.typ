@@ -98,5 +98,12 @@
   show: codly.lang-set_(languages: codly-languages)
   show raw.where(block: true): codly.new
 
+  // Math stuff
+  show math.equation.where(block: true): set block(breakable: true)
+  show math.equation: it => {
+    show footnote: block
+    it
+  }
+
   body
 }

@@ -29,9 +29,6 @@
 #let show-appendix(body) = {
   set heading(numbering: "A.1.1.1.1", supplement: i18n("appendix-title"))
   set figure(numbering: dependent-numbering("A.1"))
-  show heading: reset-counter(counter(figure.where(kind: image)))
-  show heading: reset-counter(counter(figure.where(kind: table)))
-  show heading: reset-counter(counter(math.equation))
   counter(heading).update(0)
   appx.update(true)
 
