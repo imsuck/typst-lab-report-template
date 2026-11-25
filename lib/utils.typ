@@ -1,4 +1,5 @@
 #import "@preview/headcount:0.1.1": dependent-numbering
+#import "@preview/t4t:0.4.3": def
 #import "state.typ": appx, in-outline, i18n
 
 #let flatten-none(items) = items.flatten().filter(x => x != none)
@@ -35,13 +36,7 @@
 }
 
 #let render-sections(sections) = {
-  let sections = if type(sections) == dictionary {
-    (sections,) // dealing with this case: ((file: "a")), dict in parens
-  } else {
-    sections
-  }
-
-  for sec in sections {
+  for sec in def.as-arr(sections) {
     if sec.at("pagebreak", default: false) { pagebreak() }
     if sec.at("file", default: none) != none {
       include "../" + sec.file
